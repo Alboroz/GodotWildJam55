@@ -1,22 +1,79 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Player/player_anims.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/StateMachine/StateMachine.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player/Idle.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Player/Walk.gd" type="Script" id=5]
 
-[sub_resource type="CircleShape2D" id=1]
-radius = 15.0333
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9, 10 )
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 18, 22 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "robot_idle_backward"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 22, 18, 22 ), Rect2( 18, 22, 18, 22 ), Rect2( 36, 22, 18, 22 ), Rect2( 54, 22, 18, 22 ), Rect2( 72, 22, 18, 22 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "robot_idle_forward"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 18, 22 ), Rect2( 18, 0, 18, 22 ), Rect2( 36, 0, 18, 22 ), Rect2( 54, 0, 18, 22 ), Rect2( 72, 0, 18, 22 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "robot_walk_backward"
+
+[sub_resource type="Animation" id=5]
+resource_name = "robot_walk_forward"
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 18, 22 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 1 )
 shape = SubResource( 1 )
 
 [node name="StateMachine" type="Node" parent="."]
@@ -36,5 +93,12 @@ margin_right = 20.0
 margin_bottom = -18.0
 text = "Test"
 align = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 6 )
+anims/robot_idle_backward = SubResource( 2 )
+anims/robot_idle_forward = SubResource( 3 )
+anims/robot_walk_backward = SubResource( 4 )
+anims/robot_walk_forward = SubResource( 5 )
 
 [connection signal="transitioned" from="StateMachine" to="." method="_on_StateMachine_transitioned"]
