@@ -39,6 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Godot Wild Jam 55"
+run/main_scene="res://Scenes/GameScene/GameScene.tscn"
 config/icon="res://icon.png"
 
 [display]

@@ -7,12 +7,13 @@
 [ext_resource path="res://Scenes/Player/Walk.gd" type="Script" id=5]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 31.257
+radius = 15.0333
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -30,9 +31,9 @@ script = ExtResource( 5 )
 
 [node name="Debug" type="Label" parent="."]
 margin_left = -20.0
-margin_top = -52.0
+margin_top = -32.0
 margin_right = 20.0
-margin_bottom = -38.0
+margin_bottom = -18.0
 text = "Test"
 align = 1
 
