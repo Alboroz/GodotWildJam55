@@ -2,7 +2,7 @@ extends PlayerState
 
 func enter(msg := {}):
 	
-	player.anim_player.play("robot_idle_forward")
+	player.animationState.travel("Idle")
 
 func physics_update(delta:float) -> void:
 	#Option 1:
