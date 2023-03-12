@@ -1,5 +1,8 @@
 extends PlayerState
 
+func enter(msg := {}):
+	player.anim_player.play("robot_walk_forward")
+
 func physics_update(delta:float) -> void:
 	
 	#if player pressed the move buttons

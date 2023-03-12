@@ -2,6 +2,8 @@ class_name Player
 extends KinematicBody2D
 
 onready var debugLabel = get_node("Debug")
+onready var anim_player = $AnimationPlayer
+onready var sprite = $Sprite
 
 export var speed := 300.0
 export var friction := 0.18
@@ -12,20 +14,12 @@ var facing_right = false
 
 var velocity := Vector2.ZERO
 
-onready var anim_player = $AnimationPlayer
-onready var sprite = $Sprite
-
 func get_input_direction() -> Vector2:
 	var input_vector := Vector2(
 		Input.get_action_strength("move_right")-Input.get_action_strength("move_left"),
 		Input.get_action_strength("move_down")-Input.get_action_strength("move_up")
 	)
 	
-	if $StateMachine.state.name == "Idle":
-		anim_player.play("robot_idle_forward")
-	elif $StateMachine.state.name == "Walk":
-		anim_player.play("robot_walk_forward")
-		
 	if facing_right and velocity.x > 0:
 		flip()
 	if !facing_right and velocity.x < 0:

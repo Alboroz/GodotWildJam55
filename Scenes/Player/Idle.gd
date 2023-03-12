@@ -1,5 +1,9 @@
 extends PlayerState
 
+func enter(msg := {}):
+	
+	player.anim_player.play("robot_idle_forward")
+
 func physics_update(delta:float) -> void:
 	#Option 1:
 	#player.velocity = lerp(player.velocity, Vector2.ZERO , player.accelerationa * delta )
