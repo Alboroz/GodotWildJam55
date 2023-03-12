@@ -23,6 +23,5 @@ remote_path = NodePath("../../Camera2D")
 [node name="Camera2D" parent="." instance=ExtResource( 3 )]
 position = Vector2( 182, 74 )
 current = true
-zoom = Vector2( 0.8, 0.8 )
 smoothing_enabled = true
 smoothing_speed = 8.0
