@@ -1,7 +1,7 @@
 extends PlayerState
 
 func enter(msg := {}):
-	player.anim_player.play("robot_walk_forward")
+	player.animationState.travel("Walk")
 
 func physics_update(delta:float) -> void:
 	
