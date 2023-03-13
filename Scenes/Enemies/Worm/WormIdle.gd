@@ -6,6 +6,7 @@ func enter(msg := {}):
 func physics_update(delta:float) -> void:
 	enemy.velocity = enemy.velocity.move_toward(Vector2.ZERO, enemy.friction * delta)
 	seek_player()
+	enemy.flip_enemy()
 	enemy.apply_soft_collisions(delta)
 	enemy.velocity = enemy.move_and_slide(enemy.velocity)
 

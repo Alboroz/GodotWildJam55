@@ -1,7 +1,10 @@
 class_name Player
 extends KinematicBody2D
 
+const scent_scene = preload("res://Scenes/Player/PlayerUtilities/Scent.tscn")
+
 onready var debugLabel = get_node("Debug")
+onready var arm = get_node("Arm")
 onready var anim_player = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
@@ -10,13 +13,13 @@ export var speed := 300.0
 export var friction := 0.18
 export var acceleration := 20.0
 
-var facing_forward = true
 var facing_right = false
-
 var velocity := Vector2.ZERO
+var scent_trail = []
 
 func _ready():
 	animationTree.active = true
+	$ScentTrailTimer.connect("timeout", self , "add_scent")
 
 func get_input_direction() -> Vector2:
 	var input_vector := Vector2(
@@ -28,7 +31,6 @@ func get_input_direction() -> Vector2:
 #		flip()
 #	if !facing_right and velocity.x < 0:
 #		flip()
-
 	var move_direction := input_vector.normalized()
 	
 	if move_direction != Vector2.ZERO:
@@ -39,7 +41,15 @@ func get_input_direction() -> Vector2:
 func _physics_process(delta):
 	#Just for debug
 	#print(velocity)
-	pass
+	arm.look_at(get_global_mouse_position())
+
+func add_scent():
+	var scent      = scent_scene.instance()
+	scent.player   = self
+	scent.position = self.position
+	
+	get_tree().current_scene.get_node("Effects").add_child(scent)
+	scent_trail.push_front(scent)
 
 func _on_StateMachine_transitioned(state_name):
 	debugLabel.text = state_name

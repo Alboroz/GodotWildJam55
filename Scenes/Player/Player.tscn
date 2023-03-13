@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Assets/Player/player_anims.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://Scenes/Player/Idle.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Player/Walk.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Player/PlayerUtilities/PlayerHurtbox.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Player/player_shadow.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Player/player_arm.png" type="Texture" id=8]
 
 [sub_resource type="CapsuleShape2D" id=32]
 radius = 7.0
@@ -162,66 +164,42 @@ tracks/0/keys = {
 "values": [ 48, 49, 50, 51, 52, 53 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=34]
 animation = "robot_idle_forward_left"
 
-[sub_resource type="AnimationNodeAnimation" id=20]
+[sub_resource type="AnimationNodeAnimation" id=35]
 animation = "robot_idle_forward"
 
-[sub_resource type="AnimationNodeAnimation" id=23]
-animation = "robot_idle_forward"
-
-[sub_resource type="AnimationNodeAnimation" id=24]
-animation = "robot_idle_backward"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id=22]
-blend_point_0/node = SubResource( 18 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=36]
+blend_point_0/node = SubResource( 34 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 20 )
+blend_point_1/node = SubResource( 35 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 23 )
-blend_point_2/pos = Vector2( 0, 1.1 )
-blend_point_3/node = SubResource( 24 )
-blend_point_3/pos = Vector2( 0, -1.1 )
-min_space = Vector2( -1, -1.1 )
-max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=26]
-animation = "robot_walk_forward"
-
-[sub_resource type="AnimationNodeAnimation" id=27]
-animation = "robot_walk_forward"
-
-[sub_resource type="AnimationNodeAnimation" id=28]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "robot_walk_forward_left"
 
-[sub_resource type="AnimationNodeAnimation" id=29]
-animation = "robot_walk_backward"
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "robot_walk_forward"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=25]
-blend_point_0/node = SubResource( 26 )
-blend_point_0/pos = Vector2( 0, 1.1 )
-blend_point_1/node = SubResource( 27 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=39]
+blend_point_0/node = SubResource( 37 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 38 )
 blend_point_1/pos = Vector2( 1, 0 )
-blend_point_2/node = SubResource( 28 )
-blend_point_2/pos = Vector2( -1, 0 )
-blend_point_3/node = SubResource( 29 )
-blend_point_3/pos = Vector2( 0, -1.1 )
-min_space = Vector2( -1, -1.1 )
-max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
 [sub_resource type="AnimationNodeStateMachine" id=16]
-states/Idle/node = SubResource( 22 )
-states/Idle/position = Vector2( 318, 60 )
-states/Walk/node = SubResource( 25 )
-states/Walk/position = Vector2( 666, 41 )
-transitions = [ "Idle", "Walk", SubResource( 30 ), "Walk", "Idle", SubResource( 31 ) ]
+states/Idle/node = SubResource( 36 )
+states/Idle/position = Vector2( 540, 94 )
+states/Walk/node = SubResource( 39 )
+states/Walk/position = Vector2( 882, 77 )
+transitions = [ "Idle", "Walk", SubResource( 40 ), "Walk", "Idle", SubResource( 41 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
@@ -236,13 +214,24 @@ script = ExtResource( 2 )
 speed = 200.0
 acceleration = 5.0
 
+[node name="ShadowSprite" type="Sprite" parent="."]
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 7 )
+offset = Vector2( 0, 1 )
+
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 offset = Vector2( 0, -10 )
 hframes = 8
 vframes = 8
 
+[node name="Arm" type="Sprite" parent="."]
+position = Vector2( 0, -5 )
+texture = ExtResource( 8 )
+offset = Vector2( 5, 0 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -6.5 )
 shape = SubResource( 32 )
 
@@ -279,8 +268,8 @@ anims/robot_walk_forward_left = SubResource( 8 )
 tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 17 )
-parameters/Idle/blend_position = Vector2( -0.204437, 1.05259 )
-parameters/Walk/blend_position = Vector2( -0.77496, 0.369828 )
+parameters/Idle/blend_position = 0.536513
+parameters/Walk/blend_position = Vector2( 0.114105, 0.0309279 )
 
 [node name="PlayerHurtbox" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -288,6 +277,10 @@ visible = false
 [node name="CollisionShape2D" parent="PlayerHurtbox" index="0"]
 position = Vector2( 0, -6.5 )
 shape = SubResource( 33 )
+
+[node name="ScentTrailTimer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
 
 [connection signal="transitioned" from="StateMachine" to="." method="_on_StateMachine_transitioned"]
 
