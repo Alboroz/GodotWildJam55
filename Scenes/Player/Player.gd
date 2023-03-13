@@ -38,7 +38,8 @@ func get_input_direction() -> Vector2:
 
 func _physics_process(delta):
 	#Just for debug
-	print(velocity)
+	#print(velocity)
+	pass
 
 func _on_StateMachine_transitioned(state_name):
 	debugLabel.text = state_name

@@ -1,13 +1,15 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://Assets/Player/player_anims.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/StateMachine/StateMachine.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/Player/Idle.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Player/Walk.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Player/PlayerUtilities/PlayerHurtbox.tscn" type="PackedScene" id=6]
 
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 9, 10 )
+[sub_resource type="CapsuleShape2D" id=32]
+radius = 7.0
+height = 1.0
 
 [sub_resource type="Animation" id=6]
 length = 0.001
@@ -224,6 +226,10 @@ start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
+[sub_resource type="CapsuleShape2D" id=33]
+radius = 5.0
+height = 5.0
+
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 2 )
@@ -237,8 +243,8 @@ hframes = 8
 vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -9 )
-shape = SubResource( 1 )
+position = Vector2( 0, -6.5 )
+shape = SubResource( 32 )
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource( 3 )
@@ -276,4 +282,13 @@ parameters/playback = SubResource( 17 )
 parameters/Idle/blend_position = Vector2( -0.204437, 1.05259 )
 parameters/Walk/blend_position = Vector2( -0.77496, 0.369828 )
 
+[node name="PlayerHurtbox" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="CollisionShape2D" parent="PlayerHurtbox" index="0"]
+position = Vector2( 0, -6.5 )
+shape = SubResource( 33 )
+
 [connection signal="transitioned" from="StateMachine" to="." method="_on_StateMachine_transitioned"]
+
+[editable path="PlayerHurtbox"]
