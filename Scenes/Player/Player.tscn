@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Assets/Player/player_anims.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
@@ -27,39 +27,29 @@ tracks/0/keys = {
 "update": 0,
 "values": [ 0 ]
 }
-
-[sub_resource type="Animation" id=2]
-resource_name = "robot_idle_backward"
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 8, 9, 10, 11, 12 ]
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arm:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
 }
-
-[sub_resource type="Animation" id=10]
-resource_name = "robot_idle_backward_left"
-length = 0.7
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 40, 41, 42, 43, 44 ]
+tracks/2/type = "value"
+tracks/2/path = NodePath("Arm2:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -94,40 +84,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 32, 33, 34, 35, 36 ]
-}
-
-[sub_resource type="Animation" id=4]
-resource_name = "robot_walk_backward"
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 24, 25, 26, 27, 28, 29 ]
-}
-
-[sub_resource type="Animation" id=9]
-resource_name = "robot_walk_backward_left"
-length = 0.6
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 56, 57, 58, 59, 60, 61 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -209,8 +165,12 @@ radius = 5.0
 height = 5.0
 
 [node name="Player" type="KinematicBody2D"]
+z_index = 1
 collision_layer = 2
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 speed = 200.0
 acceleration = 5.0
 
@@ -220,15 +180,32 @@ texture = ExtResource( 7 )
 offset = Vector2( 0, 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
+z_index = 1
 texture = ExtResource( 1 )
 offset = Vector2( 0, -10 )
 hframes = 8
 vframes = 8
 
 [node name="Arm" type="Sprite" parent="."]
-position = Vector2( 0, -5 )
+position = Vector2( -4, -5 )
+z_index = 1
 texture = ExtResource( 8 )
 offset = Vector2( 5, 0 )
+
+[node name="Position2D" type="Position2D" parent="Arm"]
+position = Vector2( 9, 0 )
+
+[node name="Arm2" type="Node2D" parent="."]
+visible = false
+position = Vector2( -4, -5 )
+rotation = -3.37721
+
+[node name="Arm2Sprite" type="Sprite" parent="Arm2"]
+position = Vector2( 9, 0 )
+texture = ExtResource( 8 )
+offset = Vector2( -5, 0 )
+
+[node name="Position2D" type="Position2D" parent="Arm2/Arm2Sprite"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -255,12 +232,8 @@ align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 6 )
-anims/robot_idle_backward = SubResource( 2 )
-anims/robot_idle_backward_left = SubResource( 10 )
 anims/robot_idle_forward = SubResource( 3 )
 anims/robot_idle_forward_left = SubResource( 7 )
-anims/robot_walk_backward = SubResource( 4 )
-anims/robot_walk_backward_left = SubResource( 9 )
 anims/robot_walk_forward = SubResource( 5 )
 anims/robot_walk_forward_left = SubResource( 8 )
 
@@ -268,11 +241,12 @@ anims/robot_walk_forward_left = SubResource( 8 )
 tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 17 )
-parameters/Idle/blend_position = 0.536513
+parameters/Idle/blend_position = Vector2( 0.928685, -0.0824742 )
 parameters/Walk/blend_position = Vector2( 0.114105, 0.0309279 )
 
 [node name="PlayerHurtbox" parent="." instance=ExtResource( 6 )]
 visible = false
+z_index = 1
 
 [node name="CollisionShape2D" parent="PlayerHurtbox" index="0"]
 position = Vector2( 0, -6.5 )

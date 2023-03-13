@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -19,6 +19,55 @@ radius = 168.0
 radius = 6.0
 height = 16.0
 
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "worm_idle"
+length = 0.7
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 6, 7, 8, 9, 10 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "worm_move"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
 [node name="Worm" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
@@ -26,8 +75,10 @@ script = ExtResource( 1 )
 [node name="SpritesAndCollisions" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="SpritesAndCollisions"]
+position = Vector2( 0, -1 )
 texture = ExtResource( 4 )
-region_enabled = true
+hframes = 6
+vframes = 2
 region_rect = Rect2( 0, 2, 36, 12 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -60,6 +111,11 @@ shape = SubResource( 4 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 enabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/worm_idle = SubResource( 6 )
+anims/worm_move = SubResource( 7 )
 
 [editable path="PlayerDetectionZone"]
 [editable path="SoftCollision"]

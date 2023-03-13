@@ -1,7 +1,7 @@
 extends WormState
 
 func enter(msg := {}):
-	pass
+	enemy.anim_player.play("worm_idle")
 
 func physics_update(delta:float) -> void:
 	enemy.velocity = enemy.velocity.move_toward(Vector2.ZERO, enemy.friction * delta)

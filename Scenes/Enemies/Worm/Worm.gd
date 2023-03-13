@@ -5,6 +5,7 @@ onready var sprite_collisions := get_node("SpritesAndCollisions")
 onready var playerDetection:= get_node("PlayerDetectionZone")
 onready var softCollision := get_node("SoftCollision")
 onready var raycast :RayCast2D = get_node("RayCast2D")
+onready var anim_player := get_node("AnimationPlayer")
 onready var start_scale :Vector2 = sprite_collisions.scale
 
 export var speed := 100.0

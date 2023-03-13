@@ -1,5 +1,7 @@
 extends WormState
 
+func enter(msg := {}):
+	enemy.anim_player.play("worm_move")
 
 func physics_update(delta:float) -> void:
 	var player = enemy.playerDetection.player
