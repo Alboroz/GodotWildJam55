@@ -171,7 +171,8 @@ script = ExtResource( 2 )
 __meta__ = {
 "_edit_lock_": true
 }
-speed = 200.0
+speed = 140.0
+friction = 0.3
 acceleration = 5.0
 
 [node name="ShadowSprite" type="Sprite" parent="."]
