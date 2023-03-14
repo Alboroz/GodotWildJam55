@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Menus/HUD/health_container.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Menus/HUD/health_bar.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Menus/HUD/cell_bar.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Menus/HUD/cell_container.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Interface/HUD/PlayerHUD.gd" type="Script" id=5]
+
+[node name="HUD" type="MarginContainer"]
+anchor_right = 1.0
+mouse_filter = 2
+custom_constants/margin_right = 5
+custom_constants/margin_top = 8
+custom_constants/margin_left = 5
+script = ExtResource( 5 )
+
+[node name="VC" type="VBoxContainer" parent="."]
+margin_left = 5.0
+margin_top = 8.0
+margin_right = 475.0
+margin_bottom = 33.0
+mouse_filter = 2
+
+[node name="HPBar" type="TextureProgress" parent="VC"]
+margin_right = 470.0
+margin_bottom = 12.0
+mouse_filter = 2
+value = 80.0
+texture_over = ExtResource( 1 )
+texture_progress = ExtResource( 2 )
+texture_progress_offset = Vector2( 0, 2 )
+
+[node name="CellDreamBar" type="TextureProgress" parent="VC"]
+margin_top = 16.0
+margin_right = 470.0
+margin_bottom = 25.0
+mouse_filter = 2
+value = 100.0
+texture_over = ExtResource( 4 )
+texture_progress = ExtResource( 3 )
+texture_progress_offset = Vector2( 0, 2 )

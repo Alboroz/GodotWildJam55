@@ -72,6 +72,10 @@ config/name="Godot Wild Jam 55"
 run/main_scene="res://Scenes/GameScene/GameScene.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayerHealth="*res://Scenes/Player/PlayerStats/PlayerHealth/PlayerHealth.tscn"
+
 [display]
 
 window/size/width=480

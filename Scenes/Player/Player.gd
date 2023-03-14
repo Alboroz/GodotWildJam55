@@ -63,7 +63,8 @@ func _physics_process(delta):
 	
 
 func on_hurtbox_area_entered(area: Hitbox):
-	print("Danno subito: " + str(area.damage_dealt))
+	PlayerHealth.take_damage(area.damage_dealt)
+	hurtbox.start_invincibility(0.6)
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("shoot"):

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Menus/Cursor/Cursor.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Interface/Cursor/Cursor.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Menus/Cursor/Cursor.png" type="Texture" id=2]
 
 [node name="Cursor" type="Node2D"]
