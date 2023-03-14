@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -10,6 +10,14 @@
 [ext_resource path="res://Scenes/Utility/Hurtbox.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/Utility/Hitbox.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Scenes/Enemies/Worm/WormAttack.gd" type="Script" id=10]
+[ext_resource path="res://Assets/Enemies/worm_shadow.png" type="Texture" id=11]
+[ext_resource path="res://Scenes/Stats/Health.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Resources/Shaders/white_blink.shader" type="Shader" id=13]
+
+[sub_resource type="ShaderMaterial" id=12]
+resource_local_to_scene = true
+shader = ExtResource( 13 )
+shader_param/active = false
 
 [sub_resource type="CapsuleShape2D" id=9]
 radius = 5.0
@@ -139,15 +147,79 @@ tracks/0/keys = {
 radius = 5.0
 height = 22.0
 
+[sub_resource type="Animation" id=13]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:material:render_priority")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpritesAndCollisions/Sprite:material:shader_param/active")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "start"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [node name="Worm" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
 speed = 80.0
 acceleration = 150.0
 
+[node name="ShadowSprite" type="Sprite" parent="."]
+position = Vector2( 0, 6 )
+texture = ExtResource( 11 )
+
 [node name="SpritesAndCollisions" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="SpritesAndCollisions"]
+material = SubResource( 12 )
 position = Vector2( 0, -1 )
 texture = ExtResource( 4 )
 hframes = 6
@@ -216,6 +288,15 @@ collision_layer = 32
 position = Vector2( -1, 0 )
 rotation = 1.5708
 shape = SubResource( 8 )
+
+[node name="Health" parent="." instance=ExtResource( 12 )]
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 13 )
+anims/start = SubResource( 14 )
+anims/stop = SubResource( 15 )
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
 [editable path="SpritesAndCollisions/Hitbox"]
 [editable path="PlayerDetectionZone"]
