@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Utility/Bullet.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Player/new_bullets.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Player/player_bullets.png" type="Texture" id=3]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 2.0
+height = 0.0
+
+[node name="PlayerBullet" type="Area2D"]
+collision_layer = 0
+collision_mask = 33
+script = ExtResource( 1 )
+speed = 400.0
+
+[node name="Sprite" type="Sprite" parent="."]
+z_index = 20
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 4, 5, 8, 5 )
+
+[node name="Sprite2" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 3, 3, 4, 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="Timer" type="Timer" parent="."]

@@ -193,7 +193,7 @@ z_index = 1
 texture = ExtResource( 8 )
 offset = Vector2( 5, 0 )
 
-[node name="Position2D" type="Position2D" parent="Arm"]
+[node name="ShootPos" type="Position2D" parent="Arm"]
 position = Vector2( 9, 0 )
 
 [node name="Arm2" type="Node2D" parent="."]
@@ -201,12 +201,13 @@ visible = false
 position = Vector2( -4, -5 )
 rotation = -3.37721
 
+[node name="ShootPos2" type="Position2D" parent="Arm2"]
+position = Vector2( 9, 0 )
+
 [node name="Arm2Sprite" type="Sprite" parent="Arm2"]
 position = Vector2( 9, 0 )
 texture = ExtResource( 8 )
 offset = Vector2( -5, 0 )
-
-[node name="Position2D" type="Position2D" parent="Arm2/Arm2Sprite"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

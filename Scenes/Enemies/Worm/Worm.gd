@@ -11,6 +11,7 @@ onready var start_scale :Vector2 = sprite_collisions.scale
 export var speed := 100.0
 export var friction := 100.0
 export var acceleration := 200.0
+export var attack_charge_speed := 300.0
 
 var velocity := Vector2.ZERO
 var direction := Vector2.ZERO

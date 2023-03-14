@@ -8,6 +8,7 @@ func physics_update(delta:float) -> void:
 	if player != null:
 #		enemy.accelerate_towards_point(player.global_position, delta)
 		chase_target(player, delta)
+		
 	else:
 		state_machine.transition_to("Idle")
 	
@@ -23,6 +24,9 @@ func chase_target(player, delta):
 	#if we see the player
 	if !enemy.raycast.is_colliding():
 		enemy.direction_from_vector(enemy.raycast.cast_to.normalized())
+		print(enemy.raycast.cast_to)
+		check_near_player()
+	#if we don't see the player , we check if we can see some scent
 	else:
 		for scent in player.scent_trail:
 			enemy.raycast.cast_to = (scent.global_position - enemy.global_position)
@@ -31,3 +35,7 @@ func chase_target(player, delta):
 			if !enemy.raycast.is_colliding():
 				enemy.direction_from_vector(enemy.raycast.cast_to.normalized())
 				break
+
+func check_near_player():
+	if abs(enemy.raycast.cast_to.x) < 70.0 and abs(enemy.raycast.cast_to.y) < 70.0:
+		state_machine.transition_to("Attack")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -7,6 +7,13 @@
 [ext_resource path="res://Scenes/Enemies/Worm/WormChase.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Utility/PlayerDetectionZone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Utility/SoftCollision.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Utility/Hurtbox.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Utility/Hitbox.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Enemies/Worm/WormAttack.gd" type="Script" id=10]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 5.0
+height = 14.0
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 4.99997
@@ -32,6 +39,66 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "worm_attack"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 13, 14, 15, 16, 17 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("StateMachine/Attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "worm_charge"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 12, 13 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("StateMachine/Attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "charge_finished"
+} ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -68,9 +135,15 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
+[sub_resource type="CapsuleShape2D" id=8]
+radius = 5.0
+height = 22.0
+
 [node name="Worm" type="KinematicBody2D"]
 collision_layer = 4
 script = ExtResource( 1 )
+speed = 80.0
+acceleration = 150.0
 
 [node name="SpritesAndCollisions" type="Node2D" parent="."]
 
@@ -78,10 +151,23 @@ script = ExtResource( 1 )
 position = Vector2( 0, -1 )
 texture = ExtResource( 4 )
 hframes = 6
-vframes = 2
+vframes = 3
 region_rect = Rect2( 0, 2, 36, 12 )
 
+[node name="Hitbox" parent="SpritesAndCollisions" instance=ExtResource( 9 )]
+visible = false
+position = Vector2( -6, 0 )
+collision_mask = 16
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" parent="SpritesAndCollisions/Hitbox" index="0"]
+rotation = 1.5708
+shape = SubResource( 9 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -0.5, 0 )
 rotation = 1.5708
 shape = SubResource( 3 )
@@ -95,6 +181,9 @@ script = ExtResource( 3 )
 
 [node name="Chase" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
+
+[node name="Attack" type="Node" parent="StateMachine"]
+script = ExtResource( 10 )
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
 visible = false
@@ -114,8 +203,21 @@ enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
+anims/worm_attack = SubResource( 10 )
+anims/worm_charge = SubResource( 11 )
 anims/worm_idle = SubResource( 6 )
 anims/worm_move = SubResource( 7 )
 
+[node name="Hurtbox" parent="." instance=ExtResource( 8 )]
+visible = false
+collision_layer = 32
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2( -1, 0 )
+rotation = 1.5708
+shape = SubResource( 8 )
+
+[editable path="SpritesAndCollisions/Hitbox"]
 [editable path="PlayerDetectionZone"]
 [editable path="SoftCollision"]
+[editable path="Hurtbox"]

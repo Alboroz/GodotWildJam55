@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Resources/Tilemaps/TilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Utility/Camera2D.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Utility/CustomCamera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.tscn" type="PackedScene" id=4]
 
 [node name="LevelOld" type="Node2D"]
