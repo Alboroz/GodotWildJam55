@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Utility/CustomCamera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Utility/Portals/DreamPortal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Utility/Portals/Teleporter.tscn" type="PackedScene" id=6]
 
 [node name="Level1" type="Node2D"]
 
@@ -33,7 +34,7 @@ tile_data = PoolIntArray( -1376253, 1, 1, -1376252, 536870913, 2, -1376251, 5368
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 104, 110 )
+position = Vector2( 60, 57 )
 
 [node name="Camera2D" parent="YSort/Player" instance=ExtResource( 3 )]
 current = true
@@ -46,3 +47,6 @@ position = Vector2( 284, 210 )
 
 [node name="DreamPortal" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 772, 75 )
+
+[node name="Teleporter" parent="YSort" instance=ExtResource( 6 )]
+position = Vector2( 45, 25 )

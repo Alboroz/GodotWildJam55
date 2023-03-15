@@ -54,4 +54,5 @@ func on_health_depleted():
 	get_parent().add_child(enemyEffect)
 	enemyEffect.global_position = global_position
 	drop.drop_items(global_position)
+	LevelNotifier.enemies_left_in_level -= 1
 	queue_free()

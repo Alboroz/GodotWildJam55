@@ -1,18 +1,75 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=12 format=2]
 
-[sub_resource type="SpriteFrames" id=1]
+[ext_resource path="res://Assets/Environment/teleporter.png" type="Texture" id=1]
+[ext_resource path="res://Resources/PortalsAndTeleporter/Teleporter.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://Assets/Environment/teleporter_shadow.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/Utility/Portals/Teleporter.gd" type="Script" id=4]
+[ext_resource path="res://Assets/Effects/green_light.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Effects/red_light.png" type="Texture" id=6]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 27, 0, 27, 43 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 27, 43 )
+
+[sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [  ],
-"loop": true,
-"name": "default",
+"frames": [ SubResource( 1 ) ],
+"loop": false,
+"name": "TeleporterClosed",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 2 ) ],
+"loop": false,
+"name": "TeleporterReady",
 "speed": 5.0
 } ]
 
-[node name="Teleporter" type="Area2D"]
+[sub_resource type="CircleShape2D" id=4]
+radius = 38.4708
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 1 )
+[sub_resource type="CapsuleShape2D" id=5]
+radius = 12.0
+height = 14.0
+
+[node name="Teleporter" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 4 )
 
 [node name="Shadow" type="Sprite" parent="."]
+position = Vector2( -1, 16 )
+texture = ExtResource( 3 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 3 )
+animation = "TeleporterReady"
+
+[node name="Door" type="AnimatedSprite" parent="."]
+frames = ExtResource( 2 )
+animation = "ClosingDoor"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )
+
+[node name="GreenLight" type="Sprite" parent="."]
+position = Vector2( 2, -13 )
+texture = ExtResource( 5 )
+
+[node name="RedLight" type="Sprite" parent="."]
+visible = false
+position = Vector2( 2, -13 )
+texture = ExtResource( 6 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 0, 2 )
+shape = SubResource( 5 )
+
+[connection signal="body_entered" from="." to="." method="_on_Teleporter_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_Teleporter_body_exited"]

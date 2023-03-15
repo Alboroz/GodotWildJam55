@@ -76,6 +76,8 @@ config/icon="res://icon.png"
 
 PlayerHealth="*res://Scenes/Player/PlayerStats/PlayerHealth/PlayerHealth.tscn"
 PlayerDreamCells="*res://Scenes/Player/PlayerStats/PlayerCellsDream/PlayerDreamCells.tscn"
+ChangeLevel="*res://Singletons/ChangeLevel.tscn"
+LevelNotifier="*res://Singletons/LevelNotifier.tscn"
 
 [display]
 

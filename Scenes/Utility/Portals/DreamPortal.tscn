@@ -40,6 +40,7 @@ collision_mask = 2
 script = ExtResource( 2 )
 
 [node name="Tooltip" type="Sprite" parent="."]
+visible = false
 position = Vector2( 17, -20 )
 scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 4 )
@@ -53,7 +54,6 @@ frames = SubResource( 5 )
 animation = "DreamPortal"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 6 )
 
 [connection signal="body_entered" from="." to="." method="_on_DreamPortal_body_entered"]
