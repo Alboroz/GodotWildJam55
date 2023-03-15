@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://Assets/Enemies/worm_shadow.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Stats/Health.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Resources/Shaders/white_blink.shader" type="Shader" id=13]
+[ext_resource path="res://Scenes/Enemies/Utility/Drop.tscn" type="PackedScene" id=14]
 
 [sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
@@ -295,6 +296,8 @@ shape = SubResource( 8 )
 anims/RESET = SubResource( 13 )
 anims/start = SubResource( 14 )
 anims/stop = SubResource( 15 )
+
+[node name="Drop" parent="." instance=ExtResource( 14 )]
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 

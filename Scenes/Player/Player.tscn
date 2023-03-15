@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/Player/player_anims.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
@@ -8,6 +8,8 @@
 [ext_resource path="res://Scenes/Player/PlayerUtilities/PlayerHurtbox.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Assets/Player/player_shadow.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Player/player_arm.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Player/Die.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Player/PlayerUtilities/Collector.tscn" type="PackedScene" id=10]
 
 [sub_resource type="CapsuleShape2D" id=32]
 radius = 7.0
@@ -52,6 +54,66 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=42]
+resource_name = "robot_death"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 64, 65, 66, 67, 68 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_death_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=47]
+resource_name = "robot_death_left"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 72, 73, 74, 75, 76 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_death_animation_finished"
+} ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "robot_idle_forward"
 length = 0.6
@@ -65,7 +127,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
@@ -82,7 +144,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 32, 33, 34, 35, 36 ]
 }
 
@@ -99,7 +161,7 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 16, 17, 18, 19, 20, 21 ]
 }
 
@@ -116,9 +178,22 @@ tracks/0/enabled = true
 tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
+"update": 0,
 "values": [ 48, 49, 50, 51, 52, 53 ]
 }
+
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "robot_death"
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "robot_death_left"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=44]
+blend_point_0/node = SubResource( 43 )
+blend_point_0/pos = Vector2( 1, 0 )
+blend_point_1/node = SubResource( 48 )
+blend_point_1/pos = Vector2( -1, 0 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id=34]
 animation = "robot_idle_forward_left"
@@ -150,18 +225,29 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=41]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+
 [sub_resource type="AnimationNodeStateMachine" id=16]
+states/Die/node = SubResource( 44 )
+states/Die/position = Vector2( 736, 191.073 )
 states/Idle/node = SubResource( 36 )
 states/Idle/position = Vector2( 540, 94 )
 states/Walk/node = SubResource( 39 )
 states/Walk/position = Vector2( 882, 77 )
-transitions = [ "Idle", "Walk", SubResource( 40 ), "Walk", "Idle", SubResource( 41 ) ]
+transitions = [ "Idle", "Walk", SubResource( 40 ), "Walk", "Idle", SubResource( 41 ), "Idle", "Die", SubResource( 45 ), "Walk", "Die", SubResource( 46 ) ]
 start_node = "Idle"
+graph_offset = Vector2( 0, 41.0733 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
 [sub_resource type="CapsuleShape2D" id=33]
 radius = 5.0
+height = 5.0
+
+[sub_resource type="CapsuleShape2D" id=49]
+radius = 6.0
 height = 5.0
 
 [node name="Player" type="KinematicBody2D"]
@@ -185,7 +271,7 @@ z_index = 1
 texture = ExtResource( 1 )
 offset = Vector2( 0, -10 )
 hframes = 8
-vframes = 8
+vframes = 12
 
 [node name="Arm" type="Sprite" parent="."]
 position = Vector2( -4, -5 )
@@ -224,6 +310,9 @@ script = ExtResource( 4 )
 [node name="Walk" type="Node" parent="StateMachine"]
 script = ExtResource( 5 )
 
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource( 9 )
+
 [node name="Debug" type="Label" parent="."]
 margin_left = -20.0
 margin_top = -32.0
@@ -234,6 +323,8 @@ align = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 6 )
+anims/robot_death = SubResource( 42 )
+anims/robot_death_left = SubResource( 47 )
 anims/robot_idle_forward = SubResource( 3 )
 anims/robot_idle_forward_left = SubResource( 7 )
 anims/robot_walk_forward = SubResource( 5 )
@@ -243,6 +334,7 @@ anims/robot_walk_forward_left = SubResource( 8 )
 tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 17 )
+parameters/Die/blend_position = Vector2( 0.936609, 0.0309279 )
 parameters/Idle/blend_position = Vector2( 0.928685, -0.0824742 )
 parameters/Walk/blend_position = Vector2( 0.114105, 0.0309279 )
 
@@ -254,6 +346,14 @@ z_index = 1
 position = Vector2( 0, -6.5 )
 shape = SubResource( 33 )
 
+[node name="Collector" parent="." instance=ExtResource( 10 )]
+visible = false
+z_index = 1
+
+[node name="CollisionShape2D" parent="Collector" index="0"]
+position = Vector2( 0, -6.5 )
+shape = SubResource( 49 )
+
 [node name="ScentTrailTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
@@ -261,3 +361,4 @@ autostart = true
 [connection signal="transitioned" from="StateMachine" to="." method="_on_StateMachine_transitioned"]
 
 [editable path="PlayerHurtbox"]
+[editable path="Collector"]

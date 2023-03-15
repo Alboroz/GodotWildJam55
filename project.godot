@@ -53,11 +53,6 @@ _global_script_classes=[ {
 "class": "WormState",
 "language": "GDScript",
 "path": "res://Scripts/StateMachine/WormState.gd"
-}, {
-"base": "Resource",
-"class": "dream_cells_type",
-"language": "GDScript",
-"path": "res://Resources/Drops/DreamCells/Dream_Cells_res.gd"
 } ]
 _global_script_class_icons={
 "Bullet": "",
@@ -68,8 +63,7 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "Worm": "",
-"WormState": "",
-"dream_cells_type": ""
+"WormState": ""
 }
 
 [application]
@@ -156,6 +150,7 @@ shoot={
 2d_physics/layer_4="SoftCollision"
 2d_physics/layer_5="PlayerHurtbox"
 2d_physics/layer_6="EnemyHurtbox"
+2d_physics/layer_7="Collectables"
 
 [physics]
 

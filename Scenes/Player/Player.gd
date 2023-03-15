@@ -28,6 +28,7 @@ func _ready():
 	animationTree.active = true
 	$ScentTrailTimer.connect("timeout", self , "add_scent")
 	hurtbox.connect("area_entered", self, "on_hurtbox_area_entered")
+	PlayerHealth.connect("health_depleted", self , "on_health_depleated")
 
 func get_input_direction() -> Vector2:
 	var input_vector := Vector2(
@@ -53,12 +54,14 @@ func _physics_process(delta):
 		facing_right = true
 		animationTree.set("parameters/Idle/blend_position", Vector2(1,0))
 		animationTree.set("parameters/Walk/blend_position", Vector2(1,0))
+		animationTree.set("parameters/Die/blend_position", Vector2(1,0))
 	else:
 		arm.visible = false
 		arm2.visible = true
 		facing_right = false
 		animationTree.set("parameters/Idle/blend_position", Vector2(-1,0))
 		animationTree.set("parameters/Walk/blend_position", Vector2(-1,0))
+		animationTree.set("parameters/Die/blend_position", Vector2(-1,0))
 	#print(get_viewport().get_mouse_position())
 	
 
@@ -89,4 +92,10 @@ func add_scent():
 
 func _on_StateMachine_transitioned(state_name):
 	debugLabel.text = state_name
+
+func on_health_depleated():
+	get_node("StateMachine").transition_to("Die")
+
+func on_death_animation_finished():
+	print("dead")
 

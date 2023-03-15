@@ -12,6 +12,8 @@ __meta__ = {
 
 [node name="Level1" parent="." instance=ExtResource( 2 )]
 
+[node name="Drops" type="Node2D" parent="."]
+
 [node name="Effects" type="Node2D" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
