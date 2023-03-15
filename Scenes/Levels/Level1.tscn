@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Utility/CustomCamera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Utility/Portals/DreamPortal.tscn" type="PackedScene" id=5]
 
 [node name="Level1" type="Node2D"]
 
@@ -42,3 +43,6 @@ position = Vector2( 390, 46 )
 
 [node name="Worm2" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 284, 210 )
+
+[node name="DreamPortal" parent="YSort" instance=ExtResource( 5 )]
+position = Vector2( 772, 75 )

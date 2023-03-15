@@ -207,7 +207,7 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[node name="Worm" type="KinematicBody2D"]
+[node name="Worm" type="KinematicBody2D" groups=["Enemies"]]
 collision_layer = 4
 script = ExtResource( 1 )
 speed = 80.0

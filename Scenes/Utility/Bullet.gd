@@ -11,7 +11,7 @@ var direction := Vector2.ZERO
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	set_as_toplevel(true)
-	look_at(position + direction)
+	#look_at(position + direction)
 	
 	timer.connect("timeout", self , "queue_free")
 	timer.start(lifetime)

@@ -30,7 +30,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Arm:visible")
+tracks/1/path = NodePath("Arms/Arm:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -42,7 +42,7 @@ tracks/1/keys = {
 "values": [ true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Arm2:visible")
+tracks/2/path = NodePath("Arms/Arm2:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -273,27 +273,33 @@ offset = Vector2( 0, -10 )
 hframes = 8
 vframes = 12
 
-[node name="Arm" type="Sprite" parent="."]
+[node name="Arms" type="Node2D" parent="."]
+
+[node name="Arm" type="Sprite" parent="Arms"]
 position = Vector2( -4, -5 )
 z_index = 1
 texture = ExtResource( 8 )
 offset = Vector2( 5, 0 )
 
-[node name="ShootPos" type="Position2D" parent="Arm"]
+[node name="ShootPos" type="Position2D" parent="Arms/Arm"]
 position = Vector2( 9, 0 )
 
-[node name="Arm2" type="Node2D" parent="."]
+[node name="Arm2" type="Node2D" parent="Arms"]
 visible = false
 position = Vector2( -4, -5 )
-rotation = -3.37721
+rotation = -2.72097
 
-[node name="ShootPos2" type="Position2D" parent="Arm2"]
+[node name="ShootPos2" type="Position2D" parent="Arms/Arm2"]
 position = Vector2( 9, 0 )
 
-[node name="Arm2Sprite" type="Sprite" parent="Arm2"]
+[node name="Arm2Sprite" type="Sprite" parent="Arms/Arm2"]
 position = Vector2( 9, 0 )
 texture = ExtResource( 8 )
 offset = Vector2( -5, 0 )
+
+[node name="CooldownTimer" type="Timer" parent="Arms"]
+wait_time = 0.3
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

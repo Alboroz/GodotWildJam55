@@ -5,10 +5,11 @@ const scent_scene = preload("res://Scenes/Player/PlayerUtilities/Scent.tscn")
 const bullet_scene = preload("res://Scenes/Player/PlayerUtilities/PlayerBullet.tscn")
 
 onready var debugLabel = get_node("Debug")
-onready var arm = get_node("Arm")
-onready var arm2 = get_node("Arm2")
-onready var shoot_pos = get_node("Arm/ShootPos")
-onready var shoot_pos2 = get_node("Arm2/ShootPos2")
+onready var arm = get_node("Arms/Arm")
+onready var arm2 = get_node("Arms/Arm2")
+onready var shoot_pos = get_node("Arms/Arm/ShootPos")
+onready var shoot_pos2 = get_node("Arms/Arm2/ShootPos2")
+onready var cooldown_timer = get_node("Arms/CooldownTimer")
 onready var sprite = get_node("Sprite")
 onready var hurtbox = get_node("PlayerHurtbox")
 onready var anim_player = $AnimationPlayer
@@ -22,6 +23,7 @@ export var acceleration := 20.0
 
 var facing_right: bool = true
 var velocity := Vector2.ZERO
+var is_in_dream_portal_area := false
 var scent_trail = []
 
 func _ready():
@@ -38,9 +40,6 @@ func get_input_direction() -> Vector2:
 	
 	var move_direction := input_vector.normalized()
 	
-#	if move_direction != Vector2.ZERO:
-#		animationTree.set("parameters/Idle/blend_position", move_direction)
-#		animationTree.set("parameters/Walk/blend_position", move_direction)
 	return move_direction
 
 func _physics_process(delta):
@@ -72,8 +71,14 @@ func on_hurtbox_area_entered(area: Hitbox):
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("shoot"):
 		shoot(bullet_scene)
+	elif event.is_action_pressed("interact") and is_in_dream_portal_area:
+		print("transport")
 
 func shoot(bullet: PackedScene):
+	if not cooldown_timer.is_stopped():
+		return
+	
+	cooldown_timer.start()
 	var bullet_instance := bullet.instance()
 	if facing_right:
 		bullet_instance.position = shoot_pos.global_position
@@ -89,6 +94,12 @@ func add_scent():
 	
 	get_tree().current_scene.get_node("Effects").add_child(scent)
 	scent_trail.push_front(scent)
+
+func on_player_entered_dream_portal_area():
+	is_in_dream_portal_area = true
+
+func on_player_exited_dream_portal_area():
+	is_in_dream_portal_area = false
 
 func _on_StateMachine_transitioned(state_name):
 	debugLabel.text = state_name

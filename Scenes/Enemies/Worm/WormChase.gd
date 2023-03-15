@@ -24,7 +24,7 @@ func chase_target(player, delta):
 	#if we see the player
 	if !enemy.raycast.is_colliding():
 		enemy.direction_from_vector(enemy.raycast.cast_to.normalized())
-		print(enemy.raycast.cast_to)
+		#print(enemy.raycast.cast_to)
 		check_near_player()
 	#if we don't see the player , we check if we can see some scent
 	else:

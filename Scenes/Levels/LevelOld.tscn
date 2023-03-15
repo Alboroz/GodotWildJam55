@@ -1,9 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/TilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Utility/CustomCamera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.tscn" type="PackedScene" id=4]
+
+[sub_resource type="NavigationPolygon" id=1]
+vertices = PoolVector2Array( 69, 48, 262, 36, 252, 169, 60, 155 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 60, 155, 252, 169, 262, 36, 69, 48 ) ]
 
 [node name="LevelOld" type="Node2D"]
 
@@ -34,3 +39,6 @@ position = Vector2( 357, 130 )
 
 [node name="Worm2" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 207, 276 )
+
+[node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="."]
+navpoly = SubResource( 1 )
