@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Utility/CustomCamera2D.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Utility/Portals/DreamPortal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Utility/Portals/Teleporter.tscn" type="PackedScene" id=6]
@@ -31,13 +30,14 @@ cell_size = Vector2( 16, 16 )
 format = 1
 tile_data = PoolIntArray( -1376253, 1, 1, -1376252, 536870913, 2, -1376251, 536870913, 2, -1376250, 536870913, 2, -1376249, 536870913, 2, -1376248, 536870913, 2, -1376247, 536870913, 2, -1376246, 536870913, 2, -1376245, 536870913, 2, -1376244, 1, 1, -1376242, 1, 1, -1376241, 536870913, 2, -1376240, 536870913, 2, -1376239, 536870913, 2, -1376238, 536870913, 2, -1376237, 536870913, 1, -1310700, 536870913, 3, -1310699, 536870913, 2, -1310698, 536870913, 2, -1310697, 536870913, 2, -1310696, 536870913, 2, -1310695, 536870913, 1, -1245171, 20, 0, -983021, 536870913, 3, -983020, 1, 3, -983011, 1, 1, -983010, 536870913, 2, -983009, 536870913, 1, -917476, 1, 3, -917472, 1, 0, -786426, 536870913, 3, -786425, 1, 3, -720870, 536870913, 3, -720869, 1, 3, -720863, 536870913, 3, -720862, 536870913, 2, -720861, 536870913, 2, -720860, 536870913, 1, -655323, 536870913, 3, -655322, 536870913, 1, 39, 1, 0, 65537, 1, 1, 65538, 1, 2, 65539, 1, 2, 65540, 1, 2, 65541, 1, 2, 65542, 1, 2, 65543, 1, 2, 65544, 1, 2, 65545, 1, 2, 65546, 1, 1, 65548, 1, 1, 65549, 1, 2, 65550, 1, 2, 65551, 1, 1, 65553, 1, 1, 65554, 1, 2, 65555, 1, 2, 65556, 1, 2, 65557, 1, 2, 65558, 1, 2, 65559, 1, 2, 65560, 1, 2, 65561, 1, 2, 65562, 1, 2, 65563, 1, 2, 65564, 1, 2, 65565, 1, 2, 65566, 1, 1, 131088, 20, 0, 196639, 1, 0, 196640, 1, 1, 196641, 1, 1, 196642, -2147483647, 3, 196648, 1, 0, 196649, 1, 1, 196650, 1, 1, 196651, 1, 1, 196652, 1, 1, 196653, 1, 1, 196654, 1, 1, 196655, 1, 1, 196656, 1, 1, 196657, 1, 1, 262155, 20, 0, 393240, 1, 0, 393241, 1, 3, 720908, 20, 0 )
 
+[node name="Drops" type="Node2D" parent="."]
+
+[node name="Effects" type="Node2D" parent="."]
+
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 60, 57 )
-
-[node name="Camera2D" parent="YSort/Player" instance=ExtResource( 3 )]
-current = true
 
 [node name="Worm" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 390, 46 )

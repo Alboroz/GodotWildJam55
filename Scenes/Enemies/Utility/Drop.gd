@@ -32,6 +32,6 @@ func _ready():
 
 func drop_items(position):
 	var cell = cell_to_drop.instance()
-	get_tree().current_scene.get_node("Drops").add_child(cell)
+	get_tree().current_scene.current_scene.get_node("Drops").add_child(cell)
 	cell.global_position = position
 	

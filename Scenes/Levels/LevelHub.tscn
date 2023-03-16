@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
+[ext_resource path="res://Scenes/Utility/Portals/TeleporterHub.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
 
 [node name="LevelHub" type="Node2D"]
 
@@ -25,3 +27,11 @@ cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
 format = 1
 tile_data = PoolIntArray( -524279, 24, 1, -524278, 24, 1, -524277, 24, 1, -524276, 24, 1, -524275, 24, 1, -524274, 24, 1, -524273, 24, 1, -524272, 24, 1, 0, 24, 1, 1, 24, 1, 3, 24, 1, 4, 24, 1, 5, 24, 1, 6, 24, 1, 7, 24, 1, 8, 24, 3, 20, 24, 1, 21, 24, 1, 22, 24, 1, 23, 24, 1, 24, 24, 1, 25, 24, 1, 26, 24, 1, 27, 24, 1, 28, 24, 1, 29, 24, 1, 131089, 24, 2, 131090, 24, 1, 131091, 24, 3, 196610, 24, 0, 393200, 24, 1, 393201, 24, 1, 393202, 24, 1, 393203, 24, 1, 393204, 24, 1, 393205, 24, 1, 393206, 24, 1, 393207, 24, 1, 393208, 24, 1, 393209, 24, 1, 393210, 24, 1, 393211, 24, 1, 393212, 24, 1, 393213, 24, 1, 393214, 24, 1, 393215, 24, 3, 327710, 24, 2, 327711, 24, 1, 327712, 24, 1, 327713, 24, 1, 327714, 24, 1, 327715, 24, 1, 327716, 24, 1, 327717, 24, 1, 327718, 24, 1 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="TeleporterHub" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 44, 376 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 136, 140 )

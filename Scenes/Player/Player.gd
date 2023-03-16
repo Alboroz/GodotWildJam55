@@ -28,7 +28,7 @@ var scent_trail = []
 
 func _ready():
 	animationTree.active = true
-	$ScentTrailTimer.connect("timeout", self , "add_scent")
+	#$ScentTrailTimer.connect("timeout", self , "add_scent")
 	hurtbox.connect("area_entered", self, "on_hurtbox_area_entered")
 	PlayerHealth.connect("health_depleted", self , "on_health_depleated")
 
@@ -92,7 +92,7 @@ func add_scent():
 	scent.player   = self
 	scent.position = self.position
 	
-	get_tree().current_scene.get_node("Effects").add_child(scent)
+	get_tree().current_scene.current_scene.get_node("Effects").add_child(scent)
 	scent_trail.push_front(scent)
 
 func on_player_entered_dream_portal_area():
