@@ -30,7 +30,7 @@ func teleporter_open():
 
 
 func _on_Teleporter_body_entered(body: Player):
-	pass # Replace with function body.
+	body.on_player_entered_teleporter_area()
 
 func _on_Teleporter_body_exited(body: Player):
-	pass # Replace with function body.
+	body.on_player_exited_teleporter_area()

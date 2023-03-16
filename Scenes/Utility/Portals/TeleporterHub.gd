@@ -10,11 +10,34 @@ export var level_to_transport := 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if level_to_transport == 1:
-		teleporter_open()
-	else:
-		teleporter_closed()
+	check_teleporter()
 
+func check_teleporter():
+	if ChangeLevel.level_progression == 0:
+		if level_to_transport == 1:
+			teleporter_open()
+		else:
+			teleporter_closed()
+	elif ChangeLevel.level_progression == 1:
+		if level_to_transport == 2:
+			teleporter_open()
+		else:
+			teleporter_closed()
+	elif ChangeLevel.level_progression == 2:
+		if level_to_transport == 3:
+			teleporter_open()
+		else:
+			teleporter_closed()
+	elif ChangeLevel.level_progression == 3:
+		if level_to_transport == 4:
+			teleporter_open()
+		else:
+			teleporter_closed()
+	elif ChangeLevel.level_progression == 4:
+		if level_to_transport == 5:
+			teleporter_open()
+		else:
+			teleporter_closed()
 
 func teleporter_closed():
 	collisionShape.set_deferred("disabled", true)
@@ -31,3 +54,8 @@ func teleporter_open():
 	door.play("OpeningDoor")
 
 
+func _on_TeleporterHub_body_entered(body: Player):
+	body.on_player_entered_teleporter_hub_area(level_to_transport)
+
+func _on_TeleporterHub_body_exited(body: Player):
+	body.on_player_exited_teleporter_hub_area()

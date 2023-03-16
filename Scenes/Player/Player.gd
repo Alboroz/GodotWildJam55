@@ -24,6 +24,10 @@ export var acceleration := 20.0
 var facing_right: bool = true
 var velocity := Vector2.ZERO
 var is_in_dream_portal_area := false
+var is_in_teleporter_area := false
+var is_in_teleporter_hub_area := false
+var is_in_dialogue_area := false
+var level_to_go := 0
 var scent_trail = []
 
 func _ready():
@@ -72,7 +76,13 @@ func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("shoot"):
 		shoot(bullet_scene)
 	elif event.is_action_pressed("interact") and is_in_dream_portal_area:
-		print("transport")
+		ChangeLevel.go_to_dream_level()
+	elif event.is_action_pressed("interact") and is_in_teleporter_area:
+		ChangeLevel.go_to_hub_area()
+	elif event.is_action_pressed("interact") and is_in_teleporter_hub_area:
+		ChangeLevel.go_to_level(level_to_go)
+	elif event.is_action_pressed("interact") and is_in_dialogue_area:
+		print("dialogo")
 
 func shoot(bullet: PackedScene):
 	if not cooldown_timer.is_stopped():
@@ -100,6 +110,20 @@ func on_player_entered_dream_portal_area():
 
 func on_player_exited_dream_portal_area():
 	is_in_dream_portal_area = false
+
+func on_player_entered_teleporter_area():
+	is_in_teleporter_area = true
+
+func on_player_exited_teleporter_area():
+	is_in_teleporter_area = false
+
+func on_player_entered_teleporter_hub_area(level_to_transport : int):
+	level_to_go = level_to_transport
+	is_in_teleporter_hub_area = true
+
+func on_player_exited_teleporter_hub_area():
+	is_in_teleporter_hub_area = false
+
 
 func _on_StateMachine_transitioned(state_name):
 	debugLabel.text = state_name

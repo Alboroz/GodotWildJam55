@@ -1,7 +1,16 @@
 extends Node2D
+class_name GameScene
 
-onready var current_scene = null
+var current_scene = null
 
+const hub_area_path = "res://Scenes/Levels/LevelHub.tscn"
+const level_1_path = "res://Scenes/Levels/Level1.tscn"
+const level_2_path = "res://Scenes/Levels/Level1.tscn"
+const level_3_path = "res://Scenes/Levels/Level1.tscn"
+const level_4_path = "res://Scenes/Levels/Level1.tscn"
+const level_5_path = "res://Scenes/Levels/Level1.tscn"
+
+const dream_level_1_path = ""
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,12 +30,11 @@ func goto_scene(path):
 
 
 func _deferred_goto_scene(path):
+	#Add transition here
+	
 	current_scene.free()
-	
 	var s = ResourceLoader.load(path)
-	
 	current_scene = s.instance()
-	
 	add_child(current_scene)
 	
 	#get_tree().set_current_scene(current_scene)
