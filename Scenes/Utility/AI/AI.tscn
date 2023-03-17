@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://Assets/AI/AI_body.png" type="Texture" id=1]
+[ext_resource path="res://Assets/AI/AI_faces.png" type="Texture" id=2]
+[ext_resource path="res://Assets/AI/AI_body_shadow.png" type="Texture" id=3]
+[ext_resource path="res://Assets/AI/AI_stand_shadow.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Utility/AI/AI.gd" type="Script" id=5]
+[ext_resource path="res://Assets/Menus/Prompts/gdb-keyboard-Ekey.png" type="Texture" id=6]
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 84, 0, 28, 21 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 28, 21 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 28, 0, 28, 21 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 56, 0, 28, 21 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 5 ) ],
+"loop": false,
+"name": "astonished",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 1 ) ],
+"loop": false,
+"name": "happy",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 3 ) ],
+"loop": false,
+"name": "smiling",
+"speed": 5.0
+}, {
+"frames": [ SubResource( 4 ) ],
+"loop": false,
+"name": "upset",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=6]
+radius = 63.0
+height = 72.0
+
+[node name="AI" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 5 )
+
+[node name="BodyShadow" type="Sprite" parent="."]
+position = Vector2( -9, 24 )
+texture = ExtResource( 3 )
+
+[node name="StandShadow" type="Sprite" parent="."]
+position = Vector2( 37, 24 )
+texture = ExtResource( 4 )
+
+[node name="Body" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -9, -3 )
+frames = SubResource( 2 )
+animation = "happy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 6 )
+
+[node name="Tooltip" type="Sprite" parent="."]
+visible = false
+position = Vector2( 33, -27 )
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+
+[connection signal="body_entered" from="." to="." method="_on_AI_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_AI_body_exited"]

@@ -1,8 +1,6 @@
 extends Node2D
 class_name GameScene
 
-var current_scene = null
-
 const hub_area_path = "res://Scenes/Levels/LevelHub.tscn"
 const level_1_path = "res://Scenes/Levels/Level1.tscn"
 const level_2_path = "res://Scenes/Levels/Level1.tscn"
@@ -12,10 +10,32 @@ const level_5_path = "res://Scenes/Levels/Level1.tscn"
 
 const dream_level_1_path = ""
 
+onready var scene_transition := get_node("SceneTransition")
+
+var current_scene = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	current_scene = get_node("Level1")
+	#current_scene = get_node("Level1")
+	load_current_scene()
 
+func get_current_scene():
+	if ChangeLevel.is_in_hub_area:
+		pass
+	else:
+		var selected_level = ChangeLevel.level_progression # -1
+		var scene = get_node(ChangeLevel.levels[selected_level])
+
+func load_current_scene():
+	var scene = null
+	if ChangeLevel.is_in_hub_area:
+		scene = preload(hub_area_path)
+	else:
+		var selected_level = ChangeLevel.level_progression # -1
+		scene = load("res://Scenes/Levels/"+ ChangeLevel.levels[selected_level] +".tscn")
+	
+	current_scene = scene.instance()
+	add_child(current_scene)
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
@@ -31,10 +51,14 @@ func goto_scene(path):
 
 func _deferred_goto_scene(path):
 	#Add transition here
-	
+	scene_transition.play_transition(false)
+	yield(scene_transition.get_node("AnimatedSprite"),"animation_finished")
 	current_scene.free()
 	var s = ResourceLoader.load(path)
 	current_scene = s.instance()
 	add_child(current_scene)
+	
+	scene_transition.play_transition(true)
+	yield(scene_transition.get_node("AnimatedSprite"),"animation_finished")
 	
 	#get_tree().set_current_scene(current_scene)

@@ -83,6 +83,7 @@ func _unhandled_input(event: InputEvent):
 		ChangeLevel.go_to_level(level_to_go)
 	elif event.is_action_pressed("interact") and is_in_dialogue_area:
 		print("dialogo")
+		GlobalDialogues.write_dialog(["Hi little robot."])
 
 func shoot(bullet: PackedScene):
 	if not cooldown_timer.is_stopped():
@@ -132,5 +133,7 @@ func on_health_depleated():
 	get_node("StateMachine").transition_to("Die")
 
 func on_death_animation_finished():
-	print("dead")
+	#since this restart the entire GameScene the great solution is to call the goto_scene
+	#of the gameScene from the changeLevel singleton
+	get_tree().reload_current_scene()
 

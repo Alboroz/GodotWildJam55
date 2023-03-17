@@ -1,0 +1,123 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Assets/Menus/Prompts/prompt_box.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Menus/Font/joystix monospace.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scenes/Interface/Dialogues/Dialogue.gd" type="Script" id=3]
+[ext_resource path="res://Assets/Menus/MainMenu/select_arrow.png" type="Texture" id=4]
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 10
+font_data = ExtResource( 2 )
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect/Arrow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Start"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect/Arrow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("NinePatchRect/Arrow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+
+[node name="Dialogue" type="MarginContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -99.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+script = ExtResource( 3 )
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 470.0
+margin_bottom = 89.0
+texture = ExtResource( 1 )
+patch_margin_left = 20
+patch_margin_top = 18
+patch_margin_right = 22
+patch_margin_bottom = 19
+axis_stretch_vertical = 2
+
+[node name="Name" type="RichTextLabel" parent="NinePatchRect"]
+margin_left = 13.0
+margin_top = 7.0
+margin_right = 232.0
+margin_bottom = 24.0
+custom_fonts/normal_font = SubResource( 1 )
+text = "AI:"
+scroll_active = false
+
+[node name="Text" type="RichTextLabel" parent="NinePatchRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 13.0
+margin_top = 25.0
+margin_right = -13.0
+margin_bottom = -12.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_text = "dacasc"
+text = "dacasc"
+scroll_active = false
+
+[node name="Arrow" type="TextureRect" parent="NinePatchRect"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 430.0
+margin_top = 6.0
+margin_right = 447.0
+margin_bottom = 22.0
+texture = ExtResource( 4 )
+expand = true
+
+[node name="TypeTimer" type="Timer" parent="."]
+wait_time = 0.04
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/Start = SubResource( 4 )
+anims/Stop = SubResource( 5 )
