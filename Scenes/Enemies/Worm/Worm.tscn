@@ -224,7 +224,7 @@ material = SubResource( 12 )
 position = Vector2( 0, -1 )
 texture = ExtResource( 4 )
 hframes = 6
-vframes = 3
+vframes = 4
 region_rect = Rect2( 0, 2, 36, 12 )
 
 [node name="Hitbox" parent="SpritesAndCollisions" instance=ExtResource( 9 )]
