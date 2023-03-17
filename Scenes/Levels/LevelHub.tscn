@@ -37,11 +37,11 @@ tile_data = PoolIntArray( -524279, 24, 1, -524278, 24, 1, -524277, 24, 1, -52427
 [node name="Player" parent="YSort" instance=ExtResource( 3 )]
 position = Vector2( 136, 140 )
 
-[node name="TeleporterHub" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 44, 376 )
-
 [node name="AI" parent="YSort" instance=ExtResource( 5 )]
 position = Vector2( 307, 82 )
+
+[node name="TeleporterHub" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 44, 376 )
 
 [node name="TeleporterHub2" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 350, 389 )
@@ -56,5 +56,5 @@ position = Vector2( -208, 144 )
 level_to_transport = 4
 
 [node name="TeleporterHub5" parent="YSort" instance=ExtResource( 2 )]
-position = Vector2( 207, -103 )
+position = Vector2( 207, -88 )
 level_to_transport = 5

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/Environment/plant_2_shadow.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Environment/plant_2.png" type="Texture" id=2]
+
+[node name="PlantTwo" type="Sprite"]
+position = Vector2( 0, -13 )
+texture = ExtResource( 2 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 13 )
+z_index = -1
+texture = ExtResource( 1 )

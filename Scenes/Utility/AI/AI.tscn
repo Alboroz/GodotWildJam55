@@ -56,7 +56,7 @@ collision_mask = 2
 script = ExtResource( 5 )
 
 [node name="BodyShadow" type="Sprite" parent="."]
-position = Vector2( -9, 24 )
+position = Vector2( -9, 25 )
 texture = ExtResource( 3 )
 
 [node name="StandShadow" type="Sprite" parent="."]

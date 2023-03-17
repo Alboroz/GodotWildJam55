@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Decor/PlantOne.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/Utility/Portals/DreamPortal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Utility/Portals/Teleporter.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Decor/PlantTwo.tscn" type="PackedScene" id=7]
 
 [node name="Level1" type="Node2D"]
 
@@ -38,6 +40,7 @@ tile_data = PoolIntArray( -1376253, 1, 1, -1376252, 536870913, 2, -1376251, 5368
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 60, 57 )
+z_index = 0
 
 [node name="Worm" parent="YSort" instance=ExtResource( 4 )]
 position = Vector2( 390, 46 )
@@ -50,3 +53,23 @@ position = Vector2( 772, 75 )
 
 [node name="Teleporter" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 45, 25 )
+
+[node name="PlantOne" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 128, 139 )
+z_index = 1
+
+[node name="PlantOne2" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 566, -141 )
+z_index = 1
+
+[node name="PlantOne3" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 84, -256 )
+z_index = 1
+
+[node name="PlantTwo" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 375, 212 )
+z_index = 1
+
+[node name="PlantTwo2" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 256, -220 )
+z_index = 1

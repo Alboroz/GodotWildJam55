@@ -41,7 +41,7 @@ collision_mask = 2
 script = ExtResource( 4 )
 
 [node name="Shadow" type="Sprite" parent="."]
-position = Vector2( -1, 16 )
+position = Vector2( 0, 25 )
 texture = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
