@@ -15,7 +15,7 @@ func physics_update(delta:float) -> void:
 #			enemy.velocity += direction_of_attack * enemy.attack_charge_speed * delta
 #			one_time_done = true
 		enemy.velocity = enemy.velocity.move_toward(direction_of_attack * enemy.attack_charge_speed , enemy.acceleration * delta)
-		enemy.apply_soft_collisions(delta)
+		
 		enemy.velocity = enemy.move_and_slide(enemy.velocity)
 
 

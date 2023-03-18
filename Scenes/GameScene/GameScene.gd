@@ -31,11 +31,16 @@ func load_current_scene():
 	if ChangeLevel.is_in_hub_area:
 		scene = preload(hub_area_path)
 	else:
-		var selected_level = ChangeLevel.level_progression # -1
+		var selected_level = ChangeLevel.level_progression  -1
 		scene = load("res://Scenes/Levels/"+ ChangeLevel.levels[selected_level] +".tscn")
 	
 	current_scene = scene.instance()
 	add_child(current_scene)
+
+func restart_current_scene():
+	current_scene.queue_free()
+	load_current_scene()
+	
 
 func goto_scene(path):
 	# This function will usually be called from a signal callback,

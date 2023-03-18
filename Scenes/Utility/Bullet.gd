@@ -1,6 +1,8 @@
 class_name Bullet
 extends Hitbox
 
+const HitEffect := preload("res://Scenes/Effects/HitWorldEffect.tscn")
+
 onready var timer := get_node("Timer")
 
 export var speed := 300.0
@@ -25,4 +27,7 @@ func on_impact(area: Area2D):
 	queue_free()
 
 func on_world_impact(body: Node):
+	var hitEffect = HitEffect.instance()
+	hitEffect.global_position = global_position
+	get_tree().current_scene.add_child(hitEffect)
 	queue_free()

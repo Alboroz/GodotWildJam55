@@ -16,25 +16,33 @@ onready var anim_player = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var start_scale :Vector2 = sprite.scale
+onready var state_machine := get_node("StateMachine")
+onready var tooltip := get_node("Tooltip")
+onready var dream_state_timer : Timer= get_node("DreamStateTimer")
 
 export var speed := 300.0
 export var friction := 0.18
 export var acceleration := 20.0
+export var dream_state_duration := 15.0
+export var dream_speed := 240.0
+export var dream_accel := 10.0
 
 var facing_right: bool = true
 var velocity := Vector2.ZERO
-var is_in_dream_portal_area := false
 var is_in_teleporter_area := false
 var is_in_teleporter_hub_area := false
 var is_in_dialogue_area := false
+var can_enter_dream_state := false
 var level_to_go := 0
 var scent_trail = []
 
 func _ready():
 	animationTree.active = true
-	#$ScentTrailTimer.connect("timeout", self , "add_scent")
+	$ScentTrailTimer.connect("timeout", self , "add_scent")
 	hurtbox.connect("area_entered", self, "on_hurtbox_area_entered")
+	dream_state_timer.connect("timeout", self, "on_dream_state_finished")
 	PlayerHealth.connect("health_depleted", self , "on_health_depleated")
+	PlayerDreamCells.connect("max_dream_cells_reached", self , "on_max_dream_cells_reached")
 
 func get_input_direction() -> Vector2:
 	var input_vector := Vector2(
@@ -58,6 +66,8 @@ func _physics_process(delta):
 		animationTree.set("parameters/Idle/blend_position", Vector2(1,0))
 		animationTree.set("parameters/Walk/blend_position", Vector2(1,0))
 		animationTree.set("parameters/Die/blend_position", Vector2(1,0))
+		animationTree.set("parameters/DreamIdle/blend_position", Vector2(1,0))
+		animationTree.set("parameters/DreamWalk/blend_position", Vector2(1,0))
 	else:
 		arm.visible = false
 		arm2.visible = true
@@ -65,6 +75,8 @@ func _physics_process(delta):
 		animationTree.set("parameters/Idle/blend_position", Vector2(-1,0))
 		animationTree.set("parameters/Walk/blend_position", Vector2(-1,0))
 		animationTree.set("parameters/Die/blend_position", Vector2(-1,0))
+		animationTree.set("parameters/DreamIdle/blend_position", Vector2(-1,0))
+		animationTree.set("parameters/DreamWalk/blend_position", Vector2(-1,0))
 	#print(get_viewport().get_mouse_position())
 	
 
@@ -75,8 +87,11 @@ func on_hurtbox_area_entered(area: Hitbox):
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("shoot"):
 		shoot(bullet_scene)
-	elif event.is_action_pressed("interact") and is_in_dream_portal_area:
-		ChangeLevel.go_to_dream_level()
+	elif event.is_action_pressed("enter_dream_state") and can_enter_dream_state:
+		state_machine.transition_to("DreamIdle")
+		tooltip.visible = false
+		can_enter_dream_state = false
+		dream_state_timer.start(dream_state_duration)
 	elif event.is_action_pressed("interact") and is_in_teleporter_area:
 		ChangeLevel.go_to_hub_area()
 	elif event.is_action_pressed("interact") and is_in_teleporter_hub_area:
@@ -106,12 +121,6 @@ func add_scent():
 	get_tree().current_scene.current_scene.get_node("Effects").add_child(scent)
 	scent_trail.push_front(scent)
 
-func on_player_entered_dream_portal_area():
-	is_in_dream_portal_area = true
-
-func on_player_exited_dream_portal_area():
-	is_in_dream_portal_area = false
-
 func on_player_entered_teleporter_area():
 	is_in_teleporter_area = true
 
@@ -125,15 +134,24 @@ func on_player_entered_teleporter_hub_area(level_to_transport : int):
 func on_player_exited_teleporter_hub_area():
 	is_in_teleporter_hub_area = false
 
+func on_max_dream_cells_reached():
+	can_enter_dream_state = true
+	tooltip.visible = true
+
+func on_dream_state_finished():
+	PlayerDreamCells.reset_dream_cells()
+	state_machine.transition_to("Idle")
 
 func _on_StateMachine_transitioned(state_name):
 	debugLabel.text = state_name
 
 func on_health_depleated():
-	get_node("StateMachine").transition_to("Die")
+	state_machine.transition_to("Die")
 
 func on_death_animation_finished():
 	#since this restart the entire GameScene the great solution is to call the goto_scene
 	#of the gameScene from the changeLevel singleton
-	get_tree().reload_current_scene()
+	print(get_tree().current_scene)
+	#get_tree().reload_current_scene()
+	ChangeLevel.game_restart()
 

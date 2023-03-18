@@ -7,30 +7,36 @@ const levels = [
 	"Level4",
 	"Level5"
 	]
-const dream_levels = [
-	"DreamLevel1",
-	"DreamLevel2",
-	"DreamLevel3",
-	"DreamLevel4",
-	"DreamLevel5"
-]
 
 signal changed_level(level)
 
-var game_scene: GameScene
+var game_scene: GameScene = null
 var is_in_hub_area := false
-var level_progression := 0
-var dream_level_progression := 0
+var level_progression := 1
 
 func _ready():
-	#game_scene = get_tree().current_scene
+	game_scene = get_tree().current_scene
 	LevelNotifier.connect("enemies_finished", self , "on_current_level_finished" )
 
 func on_current_level_finished():
 	level_progression
 
-func go_to_dream_level():
-	print("dream")
+func game_restart():
+	game_scene.restart_current_scene()
+	PlayerDreamCells.reset_dream_cells()
+	PlayerHealth.reset_health()
+	match level_progression:
+		1:
+			LevelNotifier.enemies_left_in_level = 1
+		2:
+			LevelNotifier.enemies_left_in_level = 2
+		3:
+			LevelNotifier.enemies_left_in_level = 3
+		4:
+			LevelNotifier.enemies_left_in_level = 4
+		5:
+			LevelNotifier.enemies_left_in_level = 5
+
 
 func go_to_hub_area():
 	is_in_hub_area = true

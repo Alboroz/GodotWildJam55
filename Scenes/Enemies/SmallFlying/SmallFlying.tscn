@@ -1,29 +1,221 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlying.gd" type="Script" id=1]
-[ext_resource path="res://Scenes/Utility/SoftCollision.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Scenes/Utility/PlayerDetectionZone.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Utility/Hurtbox.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Enemies/small_flying.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Enemies/small_fly_shadow.png" type="Texture" id=4]
+[ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlyingChase.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlyingAttack.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlyingDie.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlyingIdle.gd" type="Script" id=8]
 
-[node name="SmallFlying" type="KinematicBody2D"]
-collision_layer = 4
+[sub_resource type="CircleShape2D" id=1]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id=3]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 200.0
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 4.0
+height = 10.0
+
+[sub_resource type="Animation" id=6]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "SmallFlyingAttack"
+length = 0.5
+tracks/0/type = "method"
+tracks/0/path = NodePath("StateMachine/Attack")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "fire_bullet"
+}, {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12 ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "SmallFlyingDeath"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite/Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 16 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_Death_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "SmallFlyingIdle"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 4.12311
+
+[node name="SmallFlying" instance=ExtResource( 2 )]
 script = ExtResource( 1 )
+attack_distance = 100.0
+fire_rate = 0.6
 
-[node name="ShadowSprite" type="Sprite" parent="."]
+[node name="ShadowSprite" parent="." index="0"]
+position = Vector2( 0, 11 )
+texture = ExtResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" parent="Sprite" index="0"]
+texture = ExtResource( 3 )
+hframes = 8
+vframes = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Position2D" type="Position2D" parent="Sprite" index="1"]
+position = Vector2( 5, 0 )
 
-[node name="SoftCollision" parent="." instance=ExtResource( 2 )]
+[node name="CollisionShape2D" parent="." index="2"]
+visible = false
+shape = SubResource( 1 )
 
-[node name="PlayerDetectionZone" parent="." instance=ExtResource( 3 )]
+[node name="StateMachine" parent="." index="3"]
+initial_state = NodePath("Idle")
 
-[node name="Hurtbox" parent="." instance=ExtResource( 4 )]
-collision_layer = 32
+[node name="Idle" type="Node" parent="StateMachine" index="0"]
+script = ExtResource( 8 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Chase" type="Node" parent="StateMachine" index="1"]
+script = ExtResource( 5 )
+
+[node name="Attack" type="Node" parent="StateMachine" index="2"]
+script = ExtResource( 6 )
+
+[node name="Die" type="Node" parent="StateMachine" index="3"]
+script = ExtResource( 7 )
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+visible = false
+shape = SubResource( 3 )
+
+[node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
+visible = false
+shape = SubResource( 2 )
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+visible = false
+rotation = 1.5708
+shape = SubResource( 4 )
+
+[node name="AnimationPlayer" parent="." index="7"]
+anims/RESET = SubResource( 6 )
+anims/SmallFlyingAttack = SubResource( 7 )
+anims/SmallFlyingDeath = SubResource( 8 )
+anims/SmallFlyingIdle = SubResource( 5 )
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+visible = false
+shape = SubResource( 9 )
 
 [editable path="SoftCollision"]
 [editable path="PlayerDetectionZone"]
 [editable path="Hurtbox"]
+[editable path="Hitbox"]

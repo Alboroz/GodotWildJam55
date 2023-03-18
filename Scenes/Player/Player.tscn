@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=2]
+[gd_scene load_steps=56 format=2]
 
 [ext_resource path="res://Assets/Player/player_anims.png" type="Texture" id=1]
 [ext_resource path="res://Scenes/Player/Player.gd" type="Script" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://Scenes/Player/Die.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/Player/PlayerUtilities/Collector.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Utility/CustomCamera2D.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Player/DreamWalk.gd" type="Script" id=12]
+[ext_resource path="res://Scenes/Player/DreamIdle.gd" type="Script" id=13]
+[ext_resource path="res://Assets/Menus/Prompts/e_f_keys.png" type="Texture" id=14]
 
 [sub_resource type="CapsuleShape2D" id=32]
 radius = 7.0
@@ -115,6 +118,74 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=50]
+resource_name = "robot_dream_idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12 ]
+}
+
+[sub_resource type="Animation" id=51]
+resource_name = "robot_dream_idle_left"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 40, 41, 42, 43, 44 ]
+}
+
+[sub_resource type="Animation" id=52]
+resource_name = "robot_dream_walk"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29 ]
+}
+
+[sub_resource type="Animation" id=53]
+resource_name = "robot_dream_walk_left"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 56, 57, 58, 59, 60, 61 ]
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "robot_idle_forward"
 length = 0.7
@@ -126,10 +197,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
-"values": [ 0, 1, 2, 3, 4, 4 ]
+"values": [ 0, 1, 2, 3, 4, 4, 4, 4 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -196,6 +267,32 @@ blend_point_1/node = SubResource( 48 )
 blend_point_1/pos = Vector2( -1, 0 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=54]
+animation = "robot_dream_idle_left"
+
+[sub_resource type="AnimationNodeAnimation" id=55]
+animation = "robot_dream_idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=56]
+blend_point_0/node = SubResource( 54 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 55 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "robot_dream_walk_left"
+
+[sub_resource type="AnimationNodeAnimation" id=65]
+animation = "robot_dream_walk"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=57]
+blend_point_0/node = SubResource( 64 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 65 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=34]
 animation = "robot_idle_forward_left"
 
@@ -230,16 +327,32 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=46]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=58]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=61]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=62]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=63]
+
 [sub_resource type="AnimationNodeStateMachine" id=16]
 states/Die/node = SubResource( 44 )
-states/Die/position = Vector2( 736, 191.073 )
+states/Die/position = Vector2( 702, -219.927 )
+states/DreamIdle/node = SubResource( 56 )
+states/DreamIdle/position = Vector2( 375, 74.7744 )
+states/DreamWalk/node = SubResource( 57 )
+states/DreamWalk/position = Vector2( 944, 74.7744 )
 states/Idle/node = SubResource( 36 )
-states/Idle/position = Vector2( 540, 94 )
+states/Idle/position = Vector2( 524, -93 )
 states/Walk/node = SubResource( 39 )
-states/Walk/position = Vector2( 882, 77 )
-transitions = [ "Idle", "Walk", SubResource( 40 ), "Walk", "Idle", SubResource( 41 ), "Idle", "Die", SubResource( 45 ), "Walk", "Die", SubResource( 46 ) ]
+states/Walk/position = Vector2( 917, -70 )
+transitions = [ "Idle", "Walk", SubResource( 40 ), "Walk", "Idle", SubResource( 41 ), "Idle", "Die", SubResource( 45 ), "Walk", "Die", SubResource( 46 ), "Idle", "DreamIdle", SubResource( 58 ), "DreamIdle", "DreamWalk", SubResource( 59 ), "DreamWalk", "DreamIdle", SubResource( 60 ), "Walk", "DreamWalk", SubResource( 61 ), "DreamIdle", "Idle", SubResource( 62 ), "DreamWalk", "Walk", SubResource( 63 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 0, 41.0733 )
+graph_offset = Vector2( 56, -113.849 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
@@ -321,7 +434,14 @@ script = ExtResource( 5 )
 [node name="Die" type="Node" parent="StateMachine"]
 script = ExtResource( 9 )
 
+[node name="DreamIdle" type="Node" parent="StateMachine"]
+script = ExtResource( 13 )
+
+[node name="DreamWalk" type="Node" parent="StateMachine"]
+script = ExtResource( 12 )
+
 [node name="Debug" type="Label" parent="."]
+visible = false
 margin_left = -20.0
 margin_top = -32.0
 margin_right = 20.0
@@ -333,6 +453,10 @@ align = 1
 anims/RESET = SubResource( 6 )
 anims/robot_death = SubResource( 42 )
 anims/robot_death_left = SubResource( 47 )
+anims/robot_dream_idle = SubResource( 50 )
+anims/robot_dream_idle_left = SubResource( 51 )
+anims/robot_dream_walk = SubResource( 52 )
+anims/robot_dream_walk_left = SubResource( 53 )
 anims/robot_idle_forward = SubResource( 3 )
 anims/robot_idle_forward_left = SubResource( 7 )
 anims/robot_walk_forward = SubResource( 5 )
@@ -341,9 +465,12 @@ anims/robot_walk_forward_left = SubResource( 8 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 17 )
 parameters/Die/blend_position = Vector2( 0.936609, 0.0309279 )
-parameters/Idle/blend_position = Vector2( 0.928685, -0.0824742 )
+parameters/DreamIdle/blend_position = Vector2( -0.895404, 0.0618557 )
+parameters/DreamWalk/blend_position = Vector2( -0.795563, 0.134021 )
+parameters/Idle/blend_position = Vector2( -0.719493, -0.017341 )
 parameters/Walk/blend_position = Vector2( 0.114105, 0.0309279 )
 
 [node name="PlayerHurtbox" parent="." instance=ExtResource( 6 )]
@@ -368,6 +495,17 @@ autostart = true
 
 [node name="CustomCamera" parent="." instance=ExtResource( 11 )]
 current = true
+
+[node name="Tooltip" type="Sprite" parent="."]
+visible = false
+position = Vector2( 10, -20 )
+z_index = 20
+texture = ExtResource( 14 )
+region_enabled = true
+region_rect = Rect2( 9, 1, 5, 5 )
+
+[node name="DreamStateTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="transitioned" from="StateMachine" to="." method="_on_StateMachine_transitioned"]
 

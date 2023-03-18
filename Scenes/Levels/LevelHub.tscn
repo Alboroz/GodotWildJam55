@@ -1,13 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Utility/Portals/TeleporterHub.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/Levels/LevelHub.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Utility/AI/AI.tscn" type="PackedScene" id=5]
 
 [node name="LevelHub" type="Node2D"]
-script = ExtResource( 4 )
 
 [node name="Floor" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
@@ -58,3 +56,5 @@ level_to_transport = 4
 [node name="TeleporterHub5" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 207, -88 )
 level_to_transport = 5
+
+[node name="Effects" type="Node2D" parent="."]

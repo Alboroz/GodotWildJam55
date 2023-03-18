@@ -291,6 +291,7 @@ rotation = 1.5708
 shape = SubResource( 8 )
 
 [node name="Health" parent="." instance=ExtResource( 12 )]
+max_health = 5
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 13 )
