@@ -12,7 +12,7 @@ signal changed_level(level)
 
 var game_scene: GameScene = null
 var is_in_hub_area := false
-var level_progression := 1
+var level_progression := 3
 
 func _ready():
 	game_scene = get_tree().current_scene

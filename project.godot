@@ -116,9 +116,11 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Godot Wild Jam 55"
+config/name="Mechamorphosis"
 run/main_scene="res://Scenes/GameScene/GameScene.tscn"
-config/icon="res://icon.png"
+boot_splash/image="res://Assets/Menus/Other/credits.png"
+boot_splash/use_filter=false
+config/icon="res://Assets/Menus/Other/favi.png"
 
 [autoload]
 
@@ -130,8 +132,8 @@ GlobalDialogues="*res://Scenes/Interface/Dialogues/GlobalDialogues.tscn"
 
 [display]
 
-window/size/width=480
-window/size/height=270
+window/size/width=400
+window/size/height=225
 window/size/test_width=1280
 window/size/test_height=720
 window/stretch/mode="viewport"

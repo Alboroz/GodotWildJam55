@@ -3,10 +3,10 @@ class_name GameScene
 
 const hub_area_path = "res://Scenes/Levels/LevelHub.tscn"
 const level_1_path = "res://Scenes/Levels/Level1.tscn"
-const level_2_path = "res://Scenes/Levels/Level1.tscn"
-const level_3_path = "res://Scenes/Levels/Level1.tscn"
-const level_4_path = "res://Scenes/Levels/Level1.tscn"
-const level_5_path = "res://Scenes/Levels/Level1.tscn"
+const level_2_path = "res://Scenes/Levels/Level2.tscn"
+const level_3_path = "res://Scenes/Levels/Level3.tscn"
+const level_4_path = "res://Scenes/Levels/Level4.tscn"
+const level_5_path = "res://Scenes/Levels/Level5.tscn"
 
 const dream_level_1_path = ""
 
