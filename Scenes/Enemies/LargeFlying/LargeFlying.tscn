@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Enemies/LargeFlying/LargeFlying.gd" type="Script" id=2]
@@ -8,6 +8,12 @@
 [ext_resource path="res://Scenes/Enemies/LargeFlying/LargeFlyingDie.gd" type="Script" id=6]
 [ext_resource path="res://Assets/Enemies/large_flying.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Enemies/large_fly_shadow.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Shaders/white_blink.shader" type="Shader" id=9]
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = ExtResource( 9 )
+shader_param/active = true
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 7.0
@@ -154,6 +160,7 @@ position = Vector2( 0, 12 )
 texture = ExtResource( 8 )
 
 [node name="Sprite" parent="Sprite" index="0"]
+material = SubResource( 10 )
 texture = ExtResource( 7 )
 hframes = 6
 vframes = 3

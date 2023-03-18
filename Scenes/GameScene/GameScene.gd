@@ -42,6 +42,10 @@ func restart_current_scene():
 	load_current_scene()
 	
 
+func _unhandled_input(event):
+	if event.is_action_pressed("pause"):
+		get_node("Interface/PauseMenu").popup()
+
 func goto_scene(path):
 	# This function will usually be called from a signal callback,
 	# or some other function in the current scene.

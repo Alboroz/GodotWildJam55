@@ -10,11 +10,12 @@
 [ext_resource path="res://Resources/Shaders/white_blink.shader" type="Shader" id=8]
 [ext_resource path="res://Scenes/Utility/Hitbox.tscn" type="PackedScene" id=9]
 
-[sub_resource type="ShaderMaterial" id=3]
+[sub_resource type="ShaderMaterial" id=1]
+resource_local_to_scene = true
 shader = ExtResource( 8 )
 shader_param/active = true
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/Sprite:material:shader_param/active")
@@ -29,7 +30,7 @@ tracks/0/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=3]
 resource_name = "start"
 length = 0.2
 tracks/0/type = "value"
@@ -45,9 +46,8 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 resource_name = "stop"
-length = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite/Sprite:material:shader_param/active")
 tracks/0/interp = 1
@@ -70,7 +70,7 @@ script = ExtResource( 7 )
 [node name="Sprite" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Sprite"]
-material = SubResource( 3 )
+material = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -94,15 +94,15 @@ max_health = 5
 
 [node name="Drop" parent="." instance=ExtResource( 2 )]
 
-[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/RESET = SubResource( 4 )
-anims/start = SubResource( 1 )
-anims/stop = SubResource( 2 )
-
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Hitbox" parent="." instance=ExtResource( 9 )]
+
+[node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 2 )
+anims/start = SubResource( 3 )
+anims/stop = SubResource( 4 )
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 
