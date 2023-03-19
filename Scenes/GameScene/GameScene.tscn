@@ -36,3 +36,5 @@ pause_mode = 2
 stream = ExtResource( 7 )
 autoplay = true
 bus = "Music"
+
+[connection signal="tree_entered" from="." to="." method="_on_GameScene_tree_entered"]

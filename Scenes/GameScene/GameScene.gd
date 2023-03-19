@@ -73,3 +73,7 @@ func _deferred_goto_scene(path):
 	yield(scene_transition.get_node("AnimatedSprite"),"animation_finished")
 	
 	#get_tree().set_current_scene(current_scene)
+
+
+func _on_GameScene_tree_entered():
+	ChangeLevel.game_scene = self

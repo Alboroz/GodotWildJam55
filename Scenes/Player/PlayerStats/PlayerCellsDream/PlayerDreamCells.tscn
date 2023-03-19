@@ -4,4 +4,4 @@
 
 [node name="PlayerDreamCells" type="Node"]
 script = ExtResource( 1 )
-max_dream_cells = 2
+max_dream_cells = 18

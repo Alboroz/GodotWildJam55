@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Scenes/Decor/PlantTwo.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Decor/PlantOne.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/Decor/PlantThree.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Scenes/Utility/Portals/Teleporter.tscn" type="PackedScene" id=9]
 
 [node name="Level5" type="Node2D"]
 
@@ -199,3 +200,6 @@ position = Vector2( -1422, -82 )
 
 [node name="SmallFlying10" parent="YSort/Flying" instance=ExtResource( 4 )]
 position = Vector2( -1471, -287 )
+
+[node name="Teleporter" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( -47, -15 )

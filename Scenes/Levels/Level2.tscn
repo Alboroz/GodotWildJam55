@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Scenes/Enemies/LargeFlying/LargeFlying.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlying.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Utility/Portals/Teleporter.tscn" type="PackedScene" id=8]
 
 [node name="Level2" type="Node2D"]
 
@@ -41,6 +42,9 @@ tile_data = PoolIntArray( -1114041, 1, 1, -1114040, 1, 1, -1114039, 1, 1, -11140
 
 [node name="Player" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 23, 12 )
+
+[node name="Teleporter" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 71, -10 )
 
 [node name="Plants" type="Node2D" parent="YSort"]
 

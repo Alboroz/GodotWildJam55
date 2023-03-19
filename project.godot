@@ -123,7 +123,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Mechamorphosis"
-run/main_scene="res://Scenes/GameScene/GameScene.tscn"
+run/main_scene="res://Scenes/Interface/Menus/MainMenu.tscn"
 boot_splash/image="res://Assets/Menus/Other/credits.png"
 boot_splash/use_filter=false
 config/icon="res://Assets/Menus/Other/favi.png"
