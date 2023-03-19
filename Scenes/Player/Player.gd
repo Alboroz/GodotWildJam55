@@ -179,5 +179,6 @@ func on_death_animation_finished():
 	#since this restart the entire GameScene the great solution is to call the goto_scene
 	#of the gameScene from the changeLevel singleton
 	#get_tree().reload_current_scene()
+	ChangeLevel.player_deaths += 1
 	ChangeLevel.game_restart()
 

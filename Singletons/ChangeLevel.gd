@@ -8,11 +8,15 @@ const levels = [
 	"Level5"
 	]
 
+const badEnding = preload("res://Scenes/Endings/BadEnding.tscn")
+const goodEnding = preload("res://Scenes/Endings/GoodEnding.tscn")
+
 signal changed_level(level)
 
 var game_scene: GameScene = null
 var is_in_hub_area := true
 var level_progression := 0
+var player_deaths := 0
 
 func _ready():
 	#game_scene = get_tree().current_scene
@@ -43,6 +47,12 @@ func game_restart():
 		5:
 			LevelNotifier.enemies_left_in_level = 27
 
+func finish_game():
+	if player_deaths > 5:
+		game_scene.goto_scene(badEnding)
+	else:
+		game_scene.goto_scene(goodEnding)
+	game_scene.going_to_ending()
 
 func go_to_hub_area():
 	is_in_hub_area = true

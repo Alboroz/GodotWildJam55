@@ -42,7 +42,10 @@ func load_current_scene():
 func restart_current_scene():
 	current_scene.queue_free()
 	load_current_scene()
-	
+
+
+func going_to_ending():
+	get_node("Interface").visible = false
 
 func _unhandled_input(event):
 	if event.is_action_pressed("pause"):
