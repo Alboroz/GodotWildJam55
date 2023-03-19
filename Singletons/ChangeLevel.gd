@@ -12,7 +12,7 @@ signal changed_level(level)
 
 var game_scene: GameScene = null
 var is_in_hub_area := false
-var level_progression := 3
+var level_progression := 4
 
 func _ready():
 	#game_scene = get_tree().current_scene
@@ -26,7 +26,7 @@ func reset():
 	is_in_hub_area = false
 
 func game_restart():
-	game_scene.restart_current_scene()
+	game_scene.reswdtart_current_scene()
 	PlayerDreamCells.reset_dream_cells()
 	PlayerHealth.reset_health()
 	match level_progression:
