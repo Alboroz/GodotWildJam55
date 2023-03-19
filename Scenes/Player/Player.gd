@@ -36,6 +36,9 @@ var can_enter_dream_state := false
 var level_to_go := 0
 var scent_trail = []
 
+var fire_rate:= 0.4
+var defense_boost_on := false
+
 func _ready():
 	animationTree.active = true
 	$ScentTrailTimer.connect("timeout", self , "add_scent")
@@ -43,6 +46,7 @@ func _ready():
 	dream_state_timer.connect("timeout", self, "on_dream_state_finished")
 	PlayerHealth.connect("health_depleted", self , "on_health_depleated")
 	PlayerDreamCells.connect("max_dream_cells_reached", self , "on_max_dream_cells_reached")
+	PlayerParts.connect("power_up_added", self , "on_power_up_changed")
 
 func get_input_direction() -> Vector2:
 	var input_vector := Vector2(
@@ -80,9 +84,26 @@ func _physics_process(delta):
 	#print(get_viewport().get_mouse_position())
 	
 
+func on_power_up_changed(new_power_up , value):
+	match new_power_up:
+		PlayerParts.rapid_fire:
+			if value:
+				fire_rate = 0.3
+			else:
+				fire_rate = 0.4
+		PlayerParts.movement_boost:
+			if value:
+				speed = 160
+			else:
+				speed = 140
+		PlayerParts.defense_boost:
+			defense_boost_on = value
+		PlayerParts.healt_max_boost:
+			PlayerHealth.max_health = 15
+
 func on_hurtbox_area_entered(area: Hitbox):
 	PlayerHealth.take_damage(area.damage_dealt)
-	hurtbox.start_invincibility(0.6)
+	hurtbox.start_invincibility(0.8)
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("shoot"):
@@ -97,14 +118,13 @@ func _unhandled_input(event: InputEvent):
 	elif event.is_action_pressed("interact") and is_in_teleporter_hub_area:
 		ChangeLevel.go_to_level(level_to_go)
 	elif event.is_action_pressed("interact") and is_in_dialogue_area:
-		print("dialogo")
 		GlobalDialogues.write_dialog(["Hi little robot."])
 
 func shoot(bullet: PackedScene):
 	if not cooldown_timer.is_stopped():
 		return
 	
-	cooldown_timer.start()
+	cooldown_timer.start(fire_rate)
 	var bullet_instance := bullet.instance()
 	if facing_right:
 		bullet_instance.position = shoot_pos.global_position
@@ -151,7 +171,6 @@ func on_health_depleated():
 func on_death_animation_finished():
 	#since this restart the entire GameScene the great solution is to call the goto_scene
 	#of the gameScene from the changeLevel singleton
-	print(get_tree().current_scene)
 	#get_tree().reload_current_scene()
 	ChangeLevel.game_restart()
 

@@ -29,6 +29,7 @@ func game_restart():
 	game_scene.reswdtart_current_scene()
 	PlayerDreamCells.reset_dream_cells()
 	PlayerHealth.reset_health()
+	PlayerParts.reset_power_ups()
 	match level_progression:
 		1:
 			LevelNotifier.enemies_left_in_level = 1

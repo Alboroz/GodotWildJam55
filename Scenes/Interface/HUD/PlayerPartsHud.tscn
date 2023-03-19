@@ -19,6 +19,7 @@ margin_right = 25.0
 margin_bottom = 225.0
 
 [node name="RapidFire" type="TextureRect" parent="VC"]
+visible = false
 modulate = Color( 1, 1, 1, 0.768627 )
 margin_right = 25.0
 margin_bottom = 25.0
@@ -33,10 +34,10 @@ region_enabled = true
 region_rect = Rect2( 2, 4, 18, 13 )
 
 [node name="MovementBoost" type="TextureRect" parent="VC"]
+visible = false
 modulate = Color( 1, 1, 1, 0.768627 )
-margin_top = 29.0
 margin_right = 25.0
-margin_bottom = 54.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 texture = ExtResource( 1 )
 expand = true
@@ -48,10 +49,10 @@ region_enabled = true
 region_rect = Rect2( 29, 4, 9, 12 )
 
 [node name="DefenseBoost" type="TextureRect" parent="VC"]
+visible = false
 modulate = Color( 1, 1, 1, 0.768627 )
-margin_top = 58.0
 margin_right = 25.0
-margin_bottom = 83.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 texture = ExtResource( 1 )
 expand = true
@@ -63,10 +64,10 @@ region_enabled = true
 region_rect = Rect2( 49, 3, 13, 14 )
 
 [node name="HealthMaxBoost" type="TextureRect" parent="VC"]
+visible = false
 modulate = Color( 1, 1, 1, 0.768627 )
-margin_top = 87.0
 margin_right = 25.0
-margin_bottom = 112.0
+margin_bottom = 25.0
 rect_min_size = Vector2( 25, 25 )
 texture = ExtResource( 1 )
 expand = true

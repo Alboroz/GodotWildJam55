@@ -57,7 +57,7 @@ position = Vector2( 200, 115 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 5 )
 animation = "heart"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Message" type="Label" parent="."]
