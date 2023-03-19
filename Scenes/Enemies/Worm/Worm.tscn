@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Scenes/Enemies/Worm/Worm.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/StateMachine/StateMachine.gd" type="Script" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://Scenes/Enemies/Worm/WormAttack.gd" type="Script" id=10]
 [ext_resource path="res://Assets/Enemies/worm_shadow.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/Stats/Health.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Enemies/Worm/WormDie.gd" type="Script" id=13]
 [ext_resource path="res://Scenes/Enemies/Utility/Drop.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Shader" id=16]
@@ -62,6 +63,18 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpritesAndCollisions/Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -121,6 +134,48 @@ tracks/1/keys = {
 "values": [ {
 "args": [  ],
 "method": "charge_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "worm_die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("SpritesAndCollisions/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 18 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("SpritesAndCollisions/Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.0666667 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_death_animation_finished"
 } ]
 }
 
@@ -272,6 +327,9 @@ script = ExtResource( 5 )
 [node name="Attack" type="Node" parent="StateMachine"]
 script = ExtResource( 10 )
 
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource( 13 )
+
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
 visible = false
 
@@ -292,6 +350,7 @@ enabled = true
 anims/RESET = SubResource( 5 )
 anims/worm_attack = SubResource( 10 )
 anims/worm_charge = SubResource( 11 )
+anims/worm_die = SubResource( 17 )
 anims/worm_idle = SubResource( 6 )
 anims/worm_move = SubResource( 7 )
 

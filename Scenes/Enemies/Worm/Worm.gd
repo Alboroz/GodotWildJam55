@@ -12,6 +12,7 @@ onready var start_scale :Vector2 = sprite_collisions.scale
 onready var health := get_node("Health")
 onready var blink_anim_player := get_node("BlinkAnimationPlayer")
 onready var drop := get_node("Drop")
+onready var hurtbox_coll_shape := get_node("Hurtbox/CollisionShape2D")
 
 export var speed := 100.0
 export var friction := 100.0
@@ -50,9 +51,15 @@ func _on_Hurtbox_area_entered(area :Hitbox):
 	blink_anim_player.play("start")
 
 func on_health_depleted():
-	var enemyEffect = EnemyDeathEffect.instance()
-	get_parent().add_child(enemyEffect)
-	enemyEffect.global_position = global_position
+#	var enemyEffect = EnemyDeathEffect.instance()
+#	get_parent().add_child(enemyEffect)
+#	enemyEffect.global_position = global_position
+#	drop.drop_items(global_position)
+#	LevelNotifier.enemies_left_in_level -= 1
+#	queue_free()
+	get_node("StateMachine").transition_to("Die")
+
+func on_death_animation_finished():
 	drop.drop_items(global_position)
 	LevelNotifier.enemies_left_in_level -= 1
 	queue_free()

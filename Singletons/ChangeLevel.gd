@@ -15,11 +15,15 @@ var is_in_hub_area := false
 var level_progression := 3
 
 func _ready():
-	game_scene = get_tree().current_scene
+	#game_scene = get_tree().current_scene
 	LevelNotifier.connect("enemies_finished", self , "on_current_level_finished" )
 
 func on_current_level_finished():
 	level_progression
+
+func reset():
+	level_progression = 0
+	is_in_hub_area = false
 
 func game_restart():
 	game_scene.restart_current_scene()

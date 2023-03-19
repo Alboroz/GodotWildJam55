@@ -64,6 +64,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://Scripts/StateMachine/PlayerState.gd"
 }, {
+"base": "Area2D",
+"class": "PowerUp",
+"language": "GDScript",
+"path": "res://Scenes/Player/PlayerStats/PowerUp.gd"
+}, {
 "base": "Enemy",
 "class": "SmallFlying",
 "language": "GDScript",
@@ -106,6 +111,7 @@ _global_script_class_icons={
 "LargeFlyingState": "",
 "Player": "",
 "PlayerState": "",
+"PowerUp": "",
 "SmallFlying": "",
 "SmallFlyingState": "",
 "State": "",
@@ -130,6 +136,7 @@ ChangeLevel="*res://Singletons/ChangeLevel.tscn"
 LevelNotifier="*res://Singletons/LevelNotifier.tscn"
 GlobalDialogues="*res://Scenes/Interface/Dialogues/GlobalDialogues.tscn"
 AudioManager="*res://Singletons/AudioManager.tscn"
+PlayerParts="*res://Scenes/Player/PlayerStats/PlayerParts.tscn"
 
 [display]
 

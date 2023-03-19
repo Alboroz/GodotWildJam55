@@ -18,6 +18,8 @@ var current_scene = null
 func _ready():
 	#current_scene = get_node("Level1")
 	load_current_scene()
+	PlayerDreamCells.reset_dream_cells()
+	PlayerHealth.reset_health()
 
 func get_current_scene():
 	if ChangeLevel.is_in_hub_area:
