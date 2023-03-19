@@ -1,11 +1,18 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Resources/Tilemaps/NewTilemapRealWorld.tres" type="TileSet" id=1]
 [ext_resource path="res://Scenes/Player/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Enemies/Worm/Worm.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Enemies/LargeFlying/LargeFlying.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlying.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Decor/PlantOne.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Decor/PlantTwo.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Decor/PlantThree.tscn" type="PackedScene" id=8]
 
 [node name="Level4" type="Node2D"]
 
 [node name="Floor" type="TileMap" parent="."]
+z_index = -1
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
 cell_custom_transform = Transform2D( 16, 0, 0, 16, 0, 0 )
@@ -37,6 +44,213 @@ position = Vector2( 39, 0 )
 
 [node name="Plants" type="Node2D" parent="YSort"]
 
+[node name="PlantOne" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 65, 146 )
+
+[node name="PlantOne2" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 565, -195 )
+
+[node name="PlantOne3" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 646, 225 )
+
+[node name="PlantOne4" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 1099, 482 )
+
+[node name="PlantOne5" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 1514, 654 )
+
+[node name="PlantOne6" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 1245, 975 )
+
+[node name="PlantOne7" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 2030, 334 )
+
+[node name="PlantOne8" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 604, 521 )
+
+[node name="PlantOne9" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 310, 723 )
+
+[node name="PlantOne10" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( -99, 594 )
+
+[node name="PlantOne11" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( -224, 143 )
+
+[node name="PlantOne12" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( -374, -77 )
+
+[node name="PlantOne13" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( -857, 496 )
+
+[node name="PlantOne14" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( -201, -341 )
+
+[node name="PlantOne15" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( -488, -710 )
+
+[node name="PlantOne16" parent="YSort/Plants" instance=ExtResource( 6 )]
+position = Vector2( 364, -848 )
+
+[node name="PlantTwo" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 38, -197 )
+
+[node name="PlantTwo2" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 414, -119 )
+
+[node name="PlantTwo3" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 788, -190 )
+
+[node name="PlantTwo4" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 518, 146 )
+
+[node name="PlantTwo5" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 916, 312 )
+
+[node name="PlantTwo6" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 1231, 703 )
+
+[node name="PlantTwo7" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 1736, 403 )
+
+[node name="PlantTwo8" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 1817, 893 )
+
+[node name="PlantTwo9" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 306, 410 )
+
+[node name="PlantTwo10" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( -414, 294 )
+
+[node name="PlantTwo11" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( -559, -313 )
+
+[node name="PlantTwo12" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( -811, -827 )
+
+[node name="PlantTwo13" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( -113, -769 )
+
+[node name="PlantTwo14" parent="YSort/Plants" instance=ExtResource( 7 )]
+position = Vector2( 503, -619 )
+
+[node name="Mushroom" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( 687, -45 )
+
+[node name="Mushroom2" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( 1999, 842 )
+
+[node name="Mushroom3" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( -102, 783 )
+
+[node name="Mushroom4" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( -230, 325 )
+
+[node name="Mushroom5" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( -98, -86 )
+
+[node name="Mushroom6" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( -243, -253 )
+
+[node name="Mushroom7" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( -890, -532 )
+
+[node name="Mushroom8" parent="YSort/Plants" instance=ExtResource( 8 )]
+position = Vector2( -371, -854 )
+
 [node name="Worms" type="Node2D" parent="YSort"]
 
+[node name="Worm" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( 131, 174 )
+
+[node name="Worm2" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( 200, -215 )
+
+[node name="Worm3" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( 569, -22 )
+
+[node name="Worm4" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( 800, 81 )
+
+[node name="Worm5" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( 1055, 340 )
+
+[node name="Worm6" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( 1005, 479 )
+
+[node name="Worm7" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( 428, 487 )
+
+[node name="Worm8" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( -33, 412 )
+
+[node name="Worm9" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( -121, 32 )
+
+[node name="Worm10" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( -121, -58 )
+
+[node name="Worm11" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( -484, -255 )
+
+[node name="Worm12" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( -553, -632 )
+
+[node name="Worm13" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( 151, -810 )
+
+[node name="Worm14" parent="YSort/Worms" instance=ExtResource( 3 )]
+position = Vector2( -840, 430 )
+
 [node name="Flying" type="Node2D" parent="YSort"]
+
+[node name="LargeFlying" parent="YSort/Flying" instance=ExtResource( 4 )]
+position = Vector2( 748, 364 )
+
+[node name="SmallFlying" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( 657, 400 )
+
+[node name="SmallFlying2" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( 748, 273 )
+
+[node name="SmallFlying3" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( 872, 402 )
+
+[node name="LargeFlying2" parent="YSort/Flying" instance=ExtResource( 4 )]
+position = Vector2( 1567, 885 )
+
+[node name="LargeFlying3" parent="YSort/Flying" instance=ExtResource( 4 )]
+position = Vector2( 1934, 524 )
+
+[node name="SmallFlying4" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( 1630, 593 )
+
+[node name="SmallFlying5" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( 1492, 327 )
+
+[node name="LargeFlying4" parent="YSort/Flying" instance=ExtResource( 4 )]
+position = Vector2( 28, 732 )
+
+[node name="LargeFlying5" parent="YSort/Flying" instance=ExtResource( 4 )]
+position = Vector2( -736, -64 )
+
+[node name="SmallFlying6" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( -778, -35 )
+
+[node name="SmallFlying7" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( -695, -37 )
+
+[node name="LargeFlying6" parent="YSort/Flying" instance=ExtResource( 4 )]
+position = Vector2( -127, -664 )
+
+[node name="SmallFlying8" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( -233, -721 )
+
+[node name="SmallFlying9" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( -24, -610 )
+
+[node name="SmallFlying10" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( -330, -380 )
+
+[node name="SmallFlying11" parent="YSort/Flying" instance=ExtResource( 5 )]
+position = Vector2( -292, -290 )
