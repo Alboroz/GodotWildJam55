@@ -129,6 +129,7 @@ PlayerDreamCells="*res://Scenes/Player/PlayerStats/PlayerCellsDream/PlayerDreamC
 ChangeLevel="*res://Singletons/ChangeLevel.tscn"
 LevelNotifier="*res://Singletons/LevelNotifier.tscn"
 GlobalDialogues="*res://Scenes/Interface/Dialogues/GlobalDialogues.tscn"
+AudioManager="*res://Singletons/AudioManager.tscn"
 
 [display]
 

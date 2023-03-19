@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlying.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Enemies/Enemy.tscn" type="PackedScene" id=2]
@@ -8,6 +8,26 @@
 [ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlyingAttack.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlyingDie.gd" type="Script" id=7]
 [ext_resource path="res://Scenes/Enemies/SmallFlying/SmallFlyingIdle.gd" type="Script" id=8]
+
+[sub_resource type="Shader" id=14]
+code = "shader_type canvas_item;
+
+uniform bool active = false;
+
+void fragment() {
+	vec4 previous_color = texture(TEXTURE, UV);
+	vec4 white_color = vec4(1.0, 1.0, 1.0, previous_color.a);
+	vec4 new_color = previous_color;
+	if (active == true) {
+		new_color = white_color;
+	}
+	COLOR = new_color;
+}"
+
+[sub_resource type="ShaderMaterial" id=13]
+resource_local_to_scene = true
+shader = SubResource( 14 )
+shader_param/active = true
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 5.0
@@ -166,6 +186,7 @@ position = Vector2( 0, 11 )
 texture = ExtResource( 4 )
 
 [node name="Sprite" parent="Sprite" index="0"]
+material = SubResource( 13 )
 texture = ExtResource( 3 )
 hframes = 8
 vframes = 3
