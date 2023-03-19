@@ -49,20 +49,23 @@ outline_size = 2
 outline_color = Color( 0.129412, 0.129412, 0.137255, 1 )
 font_data = ExtResource( 2 )
 
-[node name="BadEnding" type="Control"]
+[node name="CanvasLayer" type="CanvasLayer"]
+layer = 10
+
+[node name="BadEnding" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
 script = ExtResource( 3 )
 
-[node name="MetalHeart" type="AnimatedSprite" parent="."]
+[node name="MetalHeart" type="AnimatedSprite" parent="BadEnding"]
 position = Vector2( 200, 115 )
 scale = Vector2( 5, 5 )
 frames = SubResource( 5 )
 animation = "metal_heart"
-frame = 1
+frame = 2
 playing = true
 
-[node name="Message" type="Label" parent="."]
+[node name="Message" type="Label" parent="BadEnding"]
 margin_left = 122.0
 margin_top = 23.0
 margin_right = 461.0
@@ -72,7 +75,7 @@ text = "YOUR ROBOT HEART
    REMAINS COLD. 
       TRY AGAIN!"
 
-[node name="Deaths" type="Label" parent="."]
+[node name="Deaths" type="Label" parent="BadEnding"]
 margin_left = 19.0
 margin_top = 104.0
 margin_right = 111.0
@@ -80,7 +83,7 @@ margin_bottom = 120.0
 custom_fonts/font = SubResource( 7 )
 text = "DEATHS:"
 
-[node name="DeathNum" type="Label" parent="."]
+[node name="DeathNum" type="Label" parent="BadEnding"]
 margin_left = 54.0
 margin_top = 129.0
 margin_right = 86.0
@@ -88,7 +91,7 @@ margin_bottom = 145.0
 custom_fonts/font = SubResource( 8 )
 text = "0"
 
-[node name="Escape" type="Label" parent="."]
+[node name="Escape" type="Label" parent="BadEnding"]
 margin_left = 6.0
 margin_top = 10.0
 margin_right = 48.0

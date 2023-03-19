@@ -8,8 +8,8 @@ const levels = [
 	"Level5"
 	]
 
-const badEnding = preload("res://Scenes/Endings/BadEnding.tscn")
-const goodEnding = preload("res://Scenes/Endings/GoodEnding.tscn")
+const badEnding = "res://Scenes/Endings/BadEnding.tscn"
+const goodEnding = "res://Scenes/Endings/GoodEnding.tscn"
 
 signal changed_level(level)
 
