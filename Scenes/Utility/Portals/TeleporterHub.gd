@@ -5,6 +5,7 @@ onready var anim_sprite := get_node("AnimatedSprite")
 onready var door := get_node("Door")
 onready var green_light := get_node("GreenLight")
 onready var red_light := get_node("RedLight")
+onready var tooltip := get_node("Tooltip")
 
 export var level_to_transport := 1
 
@@ -55,7 +56,9 @@ func teleporter_open():
 
 
 func _on_TeleporterHub_body_entered(body: Player):
+	tooltip.visible = true
 	body.on_player_entered_teleporter_hub_area(level_to_transport)
 
 func _on_TeleporterHub_body_exited(body: Player):
+	tooltip.visible = false
 	body.on_player_exited_teleporter_hub_area()

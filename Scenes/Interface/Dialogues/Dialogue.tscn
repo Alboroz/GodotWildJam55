@@ -75,7 +75,7 @@ script = ExtResource( 3 )
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 470.0
+margin_right = 390.0
 margin_bottom = 89.0
 texture = ExtResource( 1 )
 patch_margin_left = 20
@@ -107,9 +107,9 @@ scroll_active = false
 
 [node name="Arrow" type="TextureRect" parent="NinePatchRect"]
 modulate = Color( 1, 1, 1, 0 )
-margin_left = 430.0
+margin_left = 353.0
 margin_top = 6.0
-margin_right = 447.0
+margin_right = 370.0
 margin_bottom = 22.0
 texture = ExtResource( 4 )
 expand = true

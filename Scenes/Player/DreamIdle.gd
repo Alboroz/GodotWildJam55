@@ -2,6 +2,7 @@ extends PlayerState
 
 func enter(msg := {}):
 	player.animationState.travel("DreamIdle")
+	AudioManager.stop_sound(AudioManager.footsteps_string)
 
 func physics_update(delta:float) -> void:
 	#Option 1:

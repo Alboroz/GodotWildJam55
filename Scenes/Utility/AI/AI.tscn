@@ -5,7 +5,7 @@
 [ext_resource path="res://Assets/AI/AI_body_shadow.png" type="Texture" id=3]
 [ext_resource path="res://Assets/AI/AI_stand_shadow.png" type="Texture" id=4]
 [ext_resource path="res://Scenes/Utility/AI/AI.gd" type="Script" id=5]
-[ext_resource path="res://Assets/Menus/Prompts/gdb-keyboard-Ekey.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Menus/Prompts/e_f_keys.png" type="Texture" id=6]
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
@@ -78,8 +78,9 @@ shape = SubResource( 6 )
 [node name="Tooltip" type="Sprite" parent="."]
 visible = false
 position = Vector2( 33, -27 )
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 6 )
+region_enabled = true
+region_rect = Rect2( 1, 1, 5, 5 )
 
 [connection signal="body_entered" from="." to="." method="_on_AI_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_AI_body_exited"]

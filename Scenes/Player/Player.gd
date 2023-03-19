@@ -100,6 +100,7 @@ func on_power_up_changed(new_power_up , value):
 			defense_boost_on = value
 		PlayerParts.healt_max_boost:
 			PlayerHealth.max_health = 15
+			PlayerHealth.emit_signal("max_health_changed", PlayerHealth.max_health)
 
 func on_hurtbox_area_entered(area: Hitbox):
 	PlayerHealth.take_damage(area.damage_dealt)
@@ -115,10 +116,15 @@ func _unhandled_input(event: InputEvent):
 		dream_state_timer.start(dream_state_duration)
 	elif event.is_action_pressed("interact") and is_in_teleporter_area:
 		ChangeLevel.go_to_hub_area()
+		AudioManager.play_sound(AudioManager.teleporter_string)
 	elif event.is_action_pressed("interact") and is_in_teleporter_hub_area:
 		ChangeLevel.go_to_level(level_to_go)
+		AudioManager.play_sound(AudioManager.teleporter_string)
 	elif event.is_action_pressed("interact") and is_in_dialogue_area:
-		GlobalDialogues.write_dialog(["Hi little robot."])
+		if GlobalDialogues.first_dialogue_done:
+			GlobalDialogues.do_other_dialogues()
+		else:
+			GlobalDialogues.do_first_dialogue()
 
 func shoot(bullet: PackedScene):
 	if not cooldown_timer.is_stopped():
@@ -131,6 +137,7 @@ func shoot(bullet: PackedScene):
 	else:
 		bullet_instance.position = shoot_pos2.global_position
 	bullet_instance.direction = global_position.direction_to(get_global_mouse_position())
+	AudioManager.play_sound(AudioManager.shoot_string)
 	add_child(bullet_instance)
 
 func add_scent():

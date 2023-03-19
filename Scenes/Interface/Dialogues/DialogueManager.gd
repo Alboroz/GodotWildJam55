@@ -54,6 +54,7 @@ func hide():
 	curr_dialogue_ins.queue_free()
 	curr_dialogue_ins = null
 	is_active = false
+	active_dialogue_offset = 0
 	emit_signal("finished")
 
 func on_message_completed():

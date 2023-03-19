@@ -1,6 +1,41 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Singletons/AudioManager.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Music/Sounds/Footsteps.wav" type="AudioStream" id=2]
+[ext_resource path="res://Assets/Music/Sounds/menu_001.wav" type="AudioStream" id=3]
+[ext_resource path="res://Assets/Music/Sounds/teleporter.wav" type="AudioStream" id=4]
+[ext_resource path="res://Assets/Music/Sounds/Weapon 2.wav" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Music/Sounds/Power Up 1.wav" type="AudioStream" id=6]
+[ext_resource path="res://Assets/Music/Sounds/DropPickup.wav" type="AudioStream" id=7]
+[ext_resource path="res://Assets/Music/Sounds/Shoot (5).wav" type="AudioStream" id=8]
 
 [node name="AudioManager" type="Node"]
 script = ExtResource( 1 )
+
+[node name="footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 2 )
+bus = "Sounds"
+
+[node name="shoot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "Sounds"
+
+[node name="teleporter" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "Sounds"
+
+[node name="menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Sounds"
+
+[node name="power_up" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+bus = "Sounds"
+
+[node name="drop_pickup" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+bus = "Sounds"
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "Sounds"

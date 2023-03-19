@@ -5,6 +5,7 @@ onready var anim_sprite := get_node("AnimatedSprite")
 onready var door := get_node("Door")
 onready var green_light := get_node("GreenLight")
 onready var red_light := get_node("RedLight")
+onready var tooltip := get_node("Tooltip")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -30,7 +31,9 @@ func teleporter_open():
 
 
 func _on_Teleporter_body_entered(body: Player):
+	tooltip.visible = true
 	body.on_player_entered_teleporter_area()
 
 func _on_Teleporter_body_exited(body: Player):
+	tooltip.visible = false
 	body.on_player_exited_teleporter_area()

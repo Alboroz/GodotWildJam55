@@ -13,7 +13,7 @@ var defense_boost_on: bool = false setget set_defense_boost
 var health_max_boost_on :bool = false setget set_health_max_boost
 
 func _ready():
-	self.rapid_fire_on = false
+	pass
 	
 
 func set_rapid_fire(new_value):

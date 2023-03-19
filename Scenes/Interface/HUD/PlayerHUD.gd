@@ -14,6 +14,7 @@ func _ready():
 	PlayerHealth.connect("health_changed", self , "on_Player_health_changed")
 	self.max_health = PlayerHealth.max_health
 	self.current_health = PlayerHealth.health
+	PlayerHealth.connect("max_health_changed", self, "on_Player_max_health_changed")
 	
 	PlayerDreamCells.connect("dream_cells_changed" , self ,"on_Player_dream_cells_changed")
 	self.current_dream_cells = PlayerDreamCells.dream_cells
@@ -24,6 +25,9 @@ func on_Player_dream_cells_changed(new_cells):
 
 func on_Player_health_changed(new_health):
 	self.current_health = new_health
+
+func on_Player_max_health_changed(new_max_health):
+	self.max_health = new_max_health
 
 #Setter function of current health
 func set_health_and_bar(new_value):

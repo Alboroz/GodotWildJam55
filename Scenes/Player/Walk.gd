@@ -2,6 +2,7 @@ extends PlayerState
 
 func enter(msg := {}):
 	player.animationState.travel("Walk")
+	AudioManager.play_sound(AudioManager.footsteps_string)
 
 func physics_update(delta:float) -> void:
 	
